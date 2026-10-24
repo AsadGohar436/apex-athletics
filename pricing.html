@@ -1,0 +1,582 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MEMBERSHIP PLANS & PRICING // APEX ATHLETICS</title>
+  <meta name="description" content="Transparent, high-performance membership plans at Apex Athletics. Starter Iron, Apex Pro, and Titan VIP tiers with zero hidden fees.">
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><polygon points='50,5 95,90 5,90' fill='%23ccff00'/><polygon points='50,30 80,85 20,85' fill='%230b0b0b'/></svg>">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Anton&family=Bebas+Neue&family=Inter:wght@300;400;500;600;700;800;900&family=Syne:wght@700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            'dark-bg': '#0b0b0b',
+            'dark-surface': '#141414',
+            'dark-card': '#191919',
+            'neon-lime': '#ccff00',
+            'neon-crimson': '#ff3344',
+            'neon-cyan': '#00f0ff',
+          },
+          fontFamily: {
+            sans: ['Inter', 'sans-serif'],
+            display: ['Syne', 'Anton', 'sans-serif'],
+            bebas: ['"Bebas Neue"', 'sans-serif'],
+          }
+        }
+      }
+    };
+  </script>
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body class="bg-dark-bg text-neutral-100 selection:bg-neon-lime selection:text-black antialiased">
+
+  <!-- CUSTOM CURSOR -->
+  <div id="cursor-dot" class="custom-cursor-dot" aria-hidden="true"></div>
+  <div id="cursor-outline" class="custom-cursor-outline" aria-hidden="true"></div>
+
+  <!-- STICKY GLASS NAVBAR -->
+  <header id="main-navbar" class="fixed top-0 left-0 w-full z-50 transition-all duration-300 py-3.5 sm:py-4 px-4 sm:px-6 lg:px-8 bg-black/80 backdrop-blur-md border-b border-white/5">
+    <div class="max-w-7xl mx-auto flex items-center justify-between gap-4">
+      
+      <a href="index.html" class="flex items-center gap-2.5 sm:gap-3 group focus:outline-none flex-shrink-0" aria-label="Apex Athletics Home">
+        <div class="w-9 h-9 sm:w-10 sm:h-10 rounded-xl bg-neon-lime flex items-center justify-center font-display font-black text-black text-lg sm:text-xl shadow-[0_0_15px_rgba(204,255,0,0.5)] group-hover:scale-105 group-hover:rotate-3 transition-transform">
+          <i class="fa-solid fa-bolt"></i>
+        </div>
+        <div class="flex flex-col">
+          <span class="font-display font-extrabold text-lg sm:text-xl tracking-tight text-white group-hover:text-neon-lime transition-colors">
+            APEX<span class="text-neon-lime font-black"> // </span>ATHLETICS
+          </span>
+          <span class="text-[9px] sm:text-[10px] tracking-[0.25em] uppercase text-neutral-400 font-semibold">Performance Lab</span>
+        </div>
+      </a>
+
+      <nav class="hidden xl:flex items-center gap-6 2xl:gap-8 text-xs 2xl:text-sm font-semibold tracking-wider uppercase text-neutral-300">
+        <a href="index.html" class="nav-link hover:text-white transition-colors">Home</a>
+        <a href="programs.html" class="nav-link hover:text-white transition-colors">Programs</a>
+        <a href="schedule.html" class="nav-link hover:text-white transition-colors">Schedule</a>
+        <a href="facilities.html" class="nav-link hover:text-white transition-colors">Arsenal</a>
+        <a href="coaches.html" class="nav-link hover:text-white transition-colors">Coaches</a>
+        <a href="pricing.html" class="nav-link text-neon-lime transition-colors">Pricing</a>
+        <a href="calculator.html" class="nav-link hover:text-white transition-colors">Lab Calc</a>
+        <a href="admin-login.html" class="nav-link text-neutral-400 hover:text-neon-lime transition-colors flex items-center gap-1.5" title="Admin Control Portal">
+          <i class="fa-solid fa-shield-halved text-xs text-neon-lime"></i> Admin
+        </a>
+      </nav>
+
+      <div class="flex items-center gap-2.5 sm:gap-3.5 flex-shrink-0">
+        <button id="audio-toggle-btn" class="hidden sm:flex items-center gap-2 px-3 py-1.5 rounded-full border border-neutral-800 bg-neutral-900/60 text-xs font-mono font-medium hover:border-neutral-600 transition-colors" title="Toggle Sound">
+          <i id="audio-icon" class="fa-solid fa-volume-xmark text-neutral-400"></i>
+          <span id="audio-status-text" class="text-neutral-400">SFX: OFF</span>
+        </button>
+
+        <button class="trigger-join-modal btn-magnetic btn-shine px-4 sm:px-6 py-2 sm:py-2.5 rounded-full bg-neon-lime text-black font-display font-black text-xs sm:text-sm tracking-wider uppercase shadow-neon-lime hover:scale-105 active:scale-95 transition-all">
+          <span>Join Now</span>
+        </button>
+
+        <button id="mobile-menu-toggle" class="xl:hidden w-10 h-10 flex flex-col items-center justify-center gap-1.5 rounded-xl bg-neutral-900 border border-neutral-800" aria-label="Toggle Navigation Menu">
+          <span id="ham-line-1" class="w-5 sm:w-6 h-0.5 bg-neutral-200 transition-all"></span>
+          <span id="ham-line-2" class="w-5 sm:w-6 h-0.5 bg-neutral-200 transition-all"></span>
+          <span id="ham-line-3" class="w-3.5 sm:w-4 h-0.5 bg-neon-lime self-start ml-2 sm:ml-2.5 transition-all"></span>
+        </button>
+      </div>
+
+    </div>
+  </header>
+
+  <!-- MOBILE MENU OVERLAY -->
+  <div id="mobile-menu-overlay" class="fixed inset-0 z-40 bg-black/95 backdrop-blur-2xl hidden flex-col justify-between px-6 py-24 overflow-y-auto" aria-modal="true" role="dialog">
+    <div class="flex flex-col gap-6">
+      <span class="text-xs font-mono tracking-widest uppercase text-neon-lime">// NAVIGATION PROTOCOL</span>
+      <nav class="flex flex-col gap-3 font-display font-black text-2xl sm:text-3xl uppercase tracking-wider">
+        <a href="index.html" class="mobile-nav-link text-neutral-300 hover:text-neon-lime">00. Home</a>
+        <a href="programs.html" class="mobile-nav-link text-neutral-300 hover:text-neon-lime">01. Programs</a>
+        <a href="schedule.html" class="mobile-nav-link text-neutral-300 hover:text-neon-lime">02. Schedule</a>
+        <a href="facilities.html" class="mobile-nav-link text-neutral-300 hover:text-neon-lime">03. Arsenal & Amenities</a>
+        <a href="coaches.html" class="mobile-nav-link text-neutral-300 hover:text-neon-lime">04. Elite Coaches</a>
+        <a href="pricing.html" class="mobile-nav-link text-neon-lime">05. Membership Tiers</a>
+        <a href="calculator.html" class="mobile-nav-link text-neutral-300 hover:text-neon-lime">06. Athletic Calculator</a>
+        <a href="admin-login.html" class="mobile-nav-link text-neutral-400 hover:text-neon-lime flex items-center gap-2 text-xl pt-2 border-t border-neutral-800">
+          <i class="fa-solid fa-shield-halved text-neon-lime text-base"></i> 07. Admin Portal
+        </a>
+      </nav>
+    </div>
+
+    <div class="flex flex-col gap-4 pt-6 border-t border-neutral-800">
+      <button class="trigger-join-modal mobile-menu-item w-full py-4 rounded-xl bg-neon-lime text-black font-display font-black text-center text-base sm:text-lg uppercase tracking-wider shadow-neon-lime">
+        Claim 7-Day VIP Pass
+      </button>
+    </div>
+  </div>
+
+  <main class="pt-32 pb-24 px-4 sm:px-8 max-w-7xl mx-auto">
+    
+    <!-- PAGE HERO HEADER -->
+    <div class="text-center max-w-3xl mx-auto mb-14">
+      <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-neon-lime/10 border border-neon-lime/30 text-neon-lime font-mono text-xs font-bold uppercase tracking-widest mb-4">
+        <i class="fa-solid fa-layer-group"></i> INVESTMENT IN HUMAN PERFORMANCE
+      </div>
+      <h1 class="font-display font-black text-4xl sm:text-6xl lg:text-7xl uppercase tracking-tight text-white">
+        MEMBERSHIP <span class="text-transparent bg-clip-text bg-gradient-to-r from-neon-lime via-white to-neon-lime neon-text-lime">TIERS</span>
+      </h1>
+      <p class="text-neutral-400 text-sm sm:text-base mt-4 leading-relaxed">
+        No long-term locks. No hidden sign-up charges. High-tier athletic conditioning built for members committed to physical mastery.
+      </p>
+
+      <!-- BILLING TOGGLE (MONTHLY / ANNUAL) -->
+      <div class="mt-8 inline-flex items-center gap-3 p-1.5 rounded-full bg-neutral-900 border border-neutral-800">
+        <button id="toggle-monthly" class="px-5 py-2 rounded-full font-mono text-xs font-bold tracking-wider uppercase transition-all bg-neon-lime text-black shadow-neon-lime">
+          Monthly Billing
+        </button>
+        <button id="toggle-annual" class="px-5 py-2 rounded-full font-mono text-xs font-bold tracking-wider uppercase text-neutral-400 hover:text-white transition-all flex items-center gap-2">
+          <span>Annual Pass</span>
+          <span class="px-2 py-0.5 rounded-full bg-neon-lime/20 text-neon-lime text-[10px] font-black border border-neon-lime/40">SAVE 20%</span>
+        </button>
+      </div>
+    </div>
+
+    <!-- 3-TIER PRICING CARDS -->
+    <div class="grid grid-cols-1 lg:grid-cols-3 gap-8 items-stretch pt-4">
+      
+      <!-- TIER 1: STARTER IRON -->
+      <div class="tilt-card rounded-2xl glass-panel border border-neutral-800 p-8 flex flex-col justify-between hover:border-neutral-700 transition-all duration-300">
+        <div>
+          <div class="flex items-center justify-between mb-4">
+            <span class="text-xs font-mono font-bold uppercase text-neutral-400 tracking-wider">Tier 01 // Baseline</span>
+            <span class="w-8 h-8 rounded-lg bg-neutral-800 flex items-center justify-center text-neutral-400 text-sm"><i class="fa-solid fa-dumbbell"></i></span>
+          </div>
+          <h2 class="font-display font-black text-3xl uppercase text-white">STARTER IRON</h2>
+          <p class="text-xs text-neutral-400 mt-2">Essential access to the iron room, calibrated free weights, and cardio deck.</p>
+
+          <div class="mt-8 pb-8 border-b border-neutral-800">
+            <div class="flex items-baseline gap-1">
+              <span class="text-2xl font-bold text-neutral-400">$</span>
+              <span class="tier-price font-bebas text-6xl font-black text-white" data-monthly="69" data-annual="55">69</span>
+              <span class="text-xs font-mono text-neutral-400">/ MONTH</span>
+            </div>
+            <p class="text-[11px] font-mono text-neutral-500 mt-1 billing-note">Billed monthly. Cancel anytime.</p>
+          </div>
+
+          <ul class="mt-8 space-y-4 text-xs font-medium text-neutral-300">
+            <li class="flex items-center gap-3">
+              <i class="fa-solid fa-circle-check text-neon-lime text-sm"></i>
+              <span>Full Access to Main Strength Floor</span>
+            </li>
+            <li class="flex items-center gap-3">
+              <i class="fa-solid fa-circle-check text-neon-lime text-sm"></i>
+              <span>Eleiko Olympic Platforms & Dumbbells up to 150 lbs</span>
+            </li>
+            <li class="flex items-center gap-3">
+              <i class="fa-solid fa-circle-check text-neon-lime text-sm"></i>
+              <span>Standard Locker Room & Showers</span>
+            </li>
+            <li class="flex items-center gap-3">
+              <i class="fa-solid fa-circle-check text-neon-lime text-sm"></i>
+              <span>Apex Performance Tracking App</span>
+            </li>
+            <li class="flex items-center gap-3 text-neutral-500 line-through">
+              <i class="fa-solid fa-xmark text-neutral-600 text-sm"></i>
+              <span>Unlimited Guided HIIT & Combat Classes</span>
+            </li>
+            <li class="flex items-center gap-3 text-neutral-500 line-through">
+              <i class="fa-solid fa-xmark text-neutral-600 text-sm"></i>
+              <span>Sub-Zero Cryotherapy & Contrast Sauna</span>
+            </li>
+            <li class="flex items-center gap-3 text-neutral-500 line-through">
+              <i class="fa-solid fa-xmark text-neutral-600 text-sm"></i>
+              <span>1-on-1 Biometric Coaching Consultations</span>
+            </li>
+          </ul>
+        </div>
+
+        <div class="mt-10">
+          <button class="trigger-plan-btn w-full py-4 rounded-xl bg-neutral-900 border border-neutral-700 hover:border-white text-white font-display font-black text-xs uppercase tracking-wider transition-all" data-plan="Starter Iron" data-price="69">
+            Select Starter Iron
+          </button>
+        </div>
+      </div>
+
+      <!-- TIER 2: APEX PRO (ELEVATED / NEON GRADIENT BORDER) -->
+      <div class="tilt-card rounded-2xl p-[2px] bg-gradient-to-b from-neon-lime via-neon-cyan to-neon-lime shadow-[0_0_40px_rgba(204,255,0,0.25)] relative transform lg:-translate-y-4 transition-all duration-300">
+        <div class="h-full w-full rounded-[14px] bg-dark-card p-8 flex flex-col justify-between">
+          <div>
+            <div class="flex items-center justify-between mb-4">
+              <span class="px-3 py-1 rounded-full bg-neon-lime text-black font-mono font-black text-[10px] uppercase tracking-widest shadow-neon-lime">
+                🔥 MOST POPULAR // OPTIMAL
+              </span>
+              <span class="w-8 h-8 rounded-lg bg-neon-lime/20 text-neon-lime flex items-center justify-center text-sm shadow-neon-lime"><i class="fa-solid fa-bolt"></i></span>
+            </div>
+            <h2 class="font-display font-black text-3xl uppercase text-white">APEX PRO</h2>
+            <p class="text-xs text-neutral-300 mt-2">Comprehensive access including full classes, recovery amenities, and biometric scans.</p>
+
+            <div class="mt-8 pb-8 border-b border-neutral-800">
+              <div class="flex items-baseline gap-1">
+                <span class="text-2xl font-bold text-neon-lime">$</span>
+                <span class="tier-price font-bebas text-6xl font-black text-white" data-monthly="129" data-annual="99">129</span>
+                <span class="text-xs font-mono text-neutral-400">/ MONTH</span>
+              </div>
+              <p class="text-[11px] font-mono text-neon-lime mt-1 billing-note">Includes 24/7 RFID wristband access.</p>
+            </div>
+
+            <ul class="mt-8 space-y-4 text-xs font-medium text-neutral-200">
+              <li class="flex items-center gap-3">
+                <i class="fa-solid fa-circle-check text-neon-lime text-sm"></i>
+                <span class="font-bold text-white">24/7 Unrestricted Biometric Keycard Access</span>
+              </li>
+              <li class="flex items-center gap-3">
+                <i class="fa-solid fa-circle-check text-neon-lime text-sm"></i>
+                <span>Unlimited HIIT, Barbell & Striking Classes</span>
+              </li>
+              <li class="flex items-center gap-3">
+                <i class="fa-solid fa-circle-check text-neon-lime text-sm"></i>
+                <span>Cedar Sauna & Contrast Ice Plunges (3x / week)</span>
+              </li>
+              <li class="flex items-center gap-3">
+                <i class="fa-solid fa-circle-check text-neon-lime text-sm"></i>
+                <span>Monthly InBody 770 Composition Scan</span>
+              </li>
+              <li class="flex items-center gap-3">
+                <i class="fa-solid fa-circle-check text-neon-lime text-sm"></i>
+                <span>4 Complimentary Guest Day Passes / month</span>
+              </li>
+              <li class="flex items-center gap-3">
+                <i class="fa-solid fa-circle-check text-neon-lime text-sm"></i>
+                <span>Full Apex Athletic App + Custom Nutrition Macro Blueprint</span>
+              </li>
+              <li class="flex items-center gap-3 text-neutral-500 line-through">
+                <i class="fa-solid fa-xmark text-neutral-600 text-sm"></i>
+                <span>Private Executive Suite & Laundry</span>
+              </li>
+            </ul>
+          </div>
+
+          <div class="mt-10">
+            <button class="trigger-plan-btn btn-magnetic btn-shine w-full py-4 rounded-xl bg-neon-lime text-black font-display font-black text-xs uppercase tracking-wider shadow-neon-lime hover:scale-[1.03] transition-all" data-plan="Apex Pro" data-price="129">
+              Enroll in Apex Pro
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- TIER 3: TITAN VIP -->
+      <div class="tilt-card rounded-2xl glass-panel border border-neutral-800 p-8 flex flex-col justify-between hover:border-neutral-700 transition-all duration-300">
+        <div>
+          <div class="flex items-center justify-between mb-4">
+            <span class="text-xs font-mono font-bold uppercase text-neon-cyan tracking-wider">Tier 03 // Ultimate</span>
+            <span class="w-8 h-8 rounded-lg bg-cyan-950/60 border border-cyan-400/30 text-neon-cyan flex items-center justify-center text-sm"><i class="fa-solid fa-crown"></i></span>
+          </div>
+          <h2 class="font-display font-black text-3xl uppercase text-white">TITAN VIP</h2>
+          <p class="text-xs text-neutral-400 mt-2">Executive-level tier for elite athletes, founders, and those demanding maximum coaching.</p>
+
+          <div class="mt-8 pb-8 border-b border-neutral-800">
+            <div class="flex items-baseline gap-1">
+              <span class="text-2xl font-bold text-neon-cyan">$</span>
+              <span class="tier-price font-bebas text-6xl font-black text-white" data-monthly="229" data-annual="179">229</span>
+              <span class="text-xs font-mono text-neutral-400">/ MONTH</span>
+            </div>
+            <p class="text-[11px] font-mono text-neutral-500 mt-1 billing-note">All-inclusive VIP concierge service.</p>
+          </div>
+
+          <ul class="mt-8 space-y-4 text-xs font-medium text-neutral-300">
+            <li class="flex items-center gap-3">
+              <i class="fa-solid fa-circle-check text-neon-cyan text-sm"></i>
+              <span class="text-white font-bold">Everything in Apex Pro Tier Included</span>
+            </li>
+            <li class="flex items-center gap-3">
+              <i class="fa-solid fa-circle-check text-neon-cyan text-sm"></i>
+              <span>Unlimited Sub-Zero Cryotherapy & Red Light Pods</span>
+            </li>
+            <li class="flex items-center gap-3">
+              <i class="fa-solid fa-circle-check text-neon-cyan text-sm"></i>
+              <span>2 Private 1-on-1 Master Coaching Sessions / month</span>
+            </li>
+            <li class="flex items-center gap-3">
+              <i class="fa-solid fa-circle-check text-neon-cyan text-sm"></i>
+              <span>Permanent Assigned Biometric Locker + Daily Gear Laundry</span>
+            </li>
+            <li class="flex items-center gap-3">
+              <i class="fa-solid fa-circle-check text-neon-cyan text-sm"></i>
+              <span>Private VIP Lounge & Coworking High-Speed Pods</span>
+            </li>
+            <li class="flex items-center gap-3">
+              <i class="fa-solid fa-circle-check text-neon-cyan text-sm"></i>
+              <span>Unlimited Guest Passes Anytime</span>
+            </li>
+            <li class="flex items-center gap-3">
+              <i class="fa-solid fa-circle-check text-neon-cyan text-sm"></i>
+              <span>Priority Class Reservations & Towel Valet</span>
+            </li>
+          </ul>
+        </div>
+
+        <div class="mt-10">
+          <button class="trigger-plan-btn w-full py-4 rounded-xl bg-neutral-900 border border-neon-cyan/50 hover:bg-neon-cyan hover:text-black text-neon-cyan font-display font-black text-xs uppercase tracking-wider transition-all" data-plan="Titan VIP" data-price="229">
+            Claim Titan VIP Status
+          </button>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- FEATURE COMPARISON TABLE -->
+    <div class="mt-28">
+      <div class="text-center max-w-xl mx-auto mb-12">
+        <span class="text-xs font-mono font-bold uppercase tracking-widest text-neon-lime">// SPECIFICATION MATRIX</span>
+        <h2 class="font-display font-black text-3xl sm:text-4xl uppercase text-white mt-2">FEATURE COMPARISON</h2>
+        <p class="text-xs sm:text-sm text-neutral-400 mt-2">Every feature broken down across all membership tiers.</p>
+      </div>
+
+      <div class="overflow-x-auto rounded-2xl border border-neutral-800 bg-neutral-900/40">
+        <table class="w-full text-left text-xs font-sans">
+          <thead>
+            <tr class="border-b border-neutral-800 bg-black/60 font-mono text-neutral-400 uppercase tracking-wider">
+              <th class="py-4 px-6 text-sm text-white font-bold">PERFORMANCE PROTOCOL</th>
+              <th class="py-4 px-6 text-center">STARTER IRON</th>
+              <th class="py-4 px-6 text-center text-neon-lime font-bold">APEX PRO</th>
+              <th class="py-4 px-6 text-center text-neon-cyan font-bold">TITAN VIP</th>
+            </tr>
+          </thead>
+          <tbody class="divide-y divide-neutral-800/80 font-mono">
+            <tr class="hover:bg-neutral-900/40">
+              <td class="py-4 px-6 text-white font-sans font-medium">Free Weights & Power Racks Access</td>
+              <td class="py-4 px-6 text-center text-neon-lime"><i class="fa-solid fa-check"></i></td>
+              <td class="py-4 px-6 text-center text-neon-lime"><i class="fa-solid fa-check"></i></td>
+              <td class="py-4 px-6 text-center text-neon-cyan"><i class="fa-solid fa-check"></i></td>
+            </tr>
+            <tr class="hover:bg-neutral-900/40">
+              <td class="py-4 px-6 text-white font-sans font-medium">24/7 Biometric RFID Access</td>
+              <td class="py-4 px-6 text-center text-neutral-600"><i class="fa-solid fa-minus"></i></td>
+              <td class="py-4 px-6 text-center text-neon-lime"><i class="fa-solid fa-check"></i></td>
+              <td class="py-4 px-6 text-center text-neon-cyan"><i class="fa-solid fa-check"></i></td>
+            </tr>
+            <tr class="hover:bg-neutral-900/40">
+              <td class="py-4 px-6 text-white font-sans font-medium">Unlimited Group Training & Classes</td>
+              <td class="py-4 px-6 text-center text-neutral-600"><i class="fa-solid fa-minus"></i></td>
+              <td class="py-4 px-6 text-center text-neon-lime"><i class="fa-solid fa-check"></i></td>
+              <td class="py-4 px-6 text-center text-neon-cyan"><i class="fa-solid fa-check"></i></td>
+            </tr>
+            <tr class="hover:bg-neutral-900/40">
+              <td class="py-4 px-6 text-white font-sans font-medium">Cedar Finnish Sauna & Cold Plunge</td>
+              <td class="py-4 px-6 text-center text-neutral-600"><i class="fa-solid fa-minus"></i></td>
+              <td class="py-4 px-6 text-center text-neutral-300">3x / week</td>
+              <td class="py-4 px-6 text-center text-neon-cyan font-bold">Unlimited</td>
+            </tr>
+            <tr class="hover:bg-neutral-900/40">
+              <td class="py-4 px-6 text-white font-sans font-medium">Sub-Zero Cryotherapy Chamber</td>
+              <td class="py-4 px-6 text-center text-neutral-600"><i class="fa-solid fa-minus"></i></td>
+              <td class="py-4 px-6 text-center text-neutral-600"><i class="fa-solid fa-minus"></i></td>
+              <td class="py-4 px-6 text-center text-neon-cyan font-bold">Unlimited</td>
+            </tr>
+            <tr class="hover:bg-neutral-900/40">
+              <td class="py-4 px-6 text-white font-sans font-medium">InBody 770 Composition Scans</td>
+              <td class="py-4 px-6 text-center text-neutral-600">$40 / scan</td>
+              <td class="py-4 px-6 text-center text-neutral-300">1x / month</td>
+              <td class="py-4 px-6 text-center text-neon-cyan font-bold">Unlimited</td>
+            </tr>
+            <tr class="hover:bg-neutral-900/40">
+              <td class="py-4 px-6 text-white font-sans font-medium">Assigned Private Locker + Laundry</td>
+              <td class="py-4 px-6 text-center text-neutral-600"><i class="fa-solid fa-minus"></i></td>
+              <td class="py-4 px-6 text-center text-neutral-600"><i class="fa-solid fa-minus"></i></td>
+              <td class="py-4 px-6 text-center text-neon-cyan font-bold"><i class="fa-solid fa-check"></i> Included</td>
+            </tr>
+            <tr class="hover:bg-neutral-900/40">
+              <td class="py-4 px-6 text-white font-sans font-medium">Monthly 1-on-1 Master Coaching</td>
+              <td class="py-4 px-6 text-center text-neutral-600"><i class="fa-solid fa-minus"></i></td>
+              <td class="py-4 px-6 text-center text-neutral-600"><i class="fa-solid fa-minus"></i></td>
+              <td class="py-4 px-6 text-center text-neon-cyan font-bold">2 Sessions</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- FAQ SECTION -->
+    <div class="mt-28 max-w-3xl mx-auto">
+      <div class="text-center mb-12">
+        <span class="text-xs font-mono font-bold uppercase tracking-widest text-neon-lime">// FREQUENTLY ANSWERED</span>
+        <h2 class="font-display font-black text-3xl sm:text-4xl uppercase text-white mt-2">MEMBERSHIP PROTOCOLS</h2>
+      </div>
+
+      <div class="space-y-4">
+        
+        <div class="p-6 rounded-2xl bg-neutral-900/60 border border-neutral-800">
+          <h3 class="font-display font-bold text-lg text-white flex items-center justify-between">
+            <span>Are there any hidden initiation or cancellation fees?</span>
+            <i class="fa-solid fa-plus text-neon-lime text-xs"></i>
+          </h3>
+          <p class="text-xs sm:text-sm text-neutral-400 mt-3 leading-relaxed">
+            Zero. We do not believe in surprise setup fees, annual facility maintenance charges, or lock-in penalties. You pay the exact advertised tier price.
+          </p>
+        </div>
+
+        <div class="p-6 rounded-2xl bg-neutral-900/60 border border-neutral-800">
+          <h3 class="font-display font-bold text-lg text-white flex items-center justify-between">
+            <span>Can I pause or freeze my membership if I travel?</span>
+            <i class="fa-solid fa-plus text-neon-lime text-xs"></i>
+          </h3>
+          <p class="text-xs sm:text-sm text-neutral-400 mt-3 leading-relaxed">
+            Yes. Pro and Titan members can freeze their membership directly inside the Apex Mobile App for up to 60 calendar days per year at zero penalty.
+          </p>
+        </div>
+
+        <div class="p-6 rounded-2xl bg-neutral-900/60 border border-neutral-800">
+          <h3 class="font-display font-bold text-lg text-white flex items-center justify-between">
+            <span>Can I test the facility before committing?</span>
+            <i class="fa-solid fa-plus text-neon-lime text-xs"></i>
+          </h3>
+          <p class="text-xs sm:text-sm text-neutral-400 mt-3 leading-relaxed">
+            Absolutely. Every prospective athlete is eligible for our complimentary 7-Day All-Access VIP Pass with full access to both strength floors and recovery amenities.
+          </p>
+        </div>
+
+      </div>
+    </div>
+
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="bg-black border-t border-neutral-800 pt-16 pb-12 px-4 sm:px-8 text-neutral-400">
+    <div class="max-w-7xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-4 text-xs font-mono">
+      <span>© 2026 APEX ATHLETICS GROUP LLC. ALL RIGHTS RESERVED.</span>
+      <div class="flex items-center gap-6">
+        <a href="index.html" class="hover:text-white transition-colors">HOME</a>
+        <a href="programs.html" class="hover:text-white transition-colors">PROGRAMS</a>
+        <a href="schedule.html" class="hover:text-white transition-colors">SCHEDULE</a>
+        <a href="admin-login.html" class="hover:text-neon-lime transition-colors">ADMIN</a>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ACTION MODAL -->
+  <div id="action-modal" class="fixed inset-0 z-50 hidden flex items-center justify-center p-3 sm:p-4 overflow-y-auto" aria-modal="true" role="dialog">
+    <div id="modal-backdrop" class="fixed inset-0 bg-black/80 backdrop-blur-md"></div>
+    <div id="modal-content-box" class="relative z-10 w-full max-w-lg max-h-[92vh] overflow-y-auto rounded-2xl bg-dark-surface border border-neutral-800 p-5 sm:p-8 shadow-2xl my-auto">
+      <button id="modal-close-btn" class="absolute top-5 right-5 w-8 h-8 rounded-full bg-neutral-800 text-neutral-400 hover:text-white flex items-center justify-center transition-colors"><i class="fa-solid fa-xmark"></i></button>
+      <div class="mb-6">
+        <span class="text-xs font-mono font-bold uppercase tracking-widest text-neon-lime">// ENROLLMENT PROTOCOL</span>
+        <h3 id="modal-title" class="font-display font-black text-2xl sm:text-3xl uppercase tracking-wide text-white mt-1">CLAIM 7-DAY VIP PASS</h3>
+        <p id="modal-subtitle" class="text-xs text-neutral-400 mt-1">Experience full unrestricted access to Apex Athletics.</p>
+      </div>
+      <form id="modal-booking-form" class="space-y-4">
+        <div>
+          <label class="block text-xs font-mono font-bold uppercase text-neutral-300 mb-1">Full Legal Name</label>
+          <input type="text" id="modal-input-name" required placeholder="e.g. Alex Mercer" class="w-full px-4 py-3 rounded-xl bg-neutral-900 border border-neutral-800 focus:border-neon-lime focus:outline-none text-white text-sm">
+        </div>
+        <div>
+          <label class="block text-xs font-mono font-bold uppercase text-neutral-300 mb-1">Email Address</label>
+          <input type="email" id="modal-input-email" required placeholder="alex@domain.com" class="w-full px-4 py-3 rounded-xl bg-neutral-900 border border-neutral-800 focus:border-neon-lime focus:outline-none text-white text-sm">
+        </div>
+        <div>
+          <label class="block text-xs font-mono font-bold uppercase text-neutral-300 mb-1">Phone Number</label>
+          <input type="tel" id="modal-input-phone" placeholder="+1 (555) 000-0000" class="w-full px-4 py-3 rounded-xl bg-neutral-900 border border-neutral-800 focus:border-neon-lime focus:outline-none text-white text-sm">
+        </div>
+        <button type="submit" class="btn-magnetic btn-shine w-full py-4 rounded-xl bg-neon-lime text-black font-display font-black text-sm uppercase tracking-wider shadow-neon-lime hover:scale-[1.02] transition-transform">Confirm & Sync to Database</button>
+      </form>
+      <div id="modal-confirmation-state" class="hidden text-center py-4">
+        <div class="w-16 h-16 rounded-full bg-neon-lime/20 border border-neon-lime text-neon-lime flex items-center justify-center text-3xl mx-auto mb-4 shadow-neon-lime"><i class="fa-solid fa-check"></i></div>
+        <h4 class="font-display font-black text-2xl uppercase text-white">ACCESS GRANTED</h4>
+        <p class="text-xs text-neutral-400 mt-1">Stored securely in cloud database.</p>
+        <div class="mt-6 p-5 rounded-xl bg-black border border-neon-lime/40 text-left font-mono">
+          <div class="flex items-center justify-between pb-3 border-b border-neutral-800"><span class="text-xs text-neon-lime font-bold">APEX // SMART PASS</span><span class="text-[10px] text-neutral-400">ACTIVE 2026</span></div>
+          <div class="py-3"><p class="text-[10px] text-neutral-500 uppercase">ATHLETE NAME</p><p id="confirm-pass-holder" class="font-bold text-white text-sm">ALEX MERCER</p></div>
+          <div class="flex items-center justify-between pt-2 border-t border-neutral-800"><div><p class="text-[10px] text-neutral-500">DIGITAL KEY ID</p><p id="confirm-pass-code" class="text-xs text-neon-lime font-bold">APX-928411</p></div><i class="fa-solid fa-qrcode text-white text-xl"></i></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="js/supabase-client.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script src="js/main.js"></script>
+  <script>
+    // Pricing monthly/annual toggle script
+    (function() {
+      const btnMonthly = document.getElementById('toggle-monthly');
+      const btnAnnual = document.getElementById('toggle-annual');
+      const prices = document.querySelectorAll('.tier-price');
+      const billingNotes = document.querySelectorAll('.billing-note');
+
+      let isAnnual = false;
+
+      function updateBilling(annual) {
+        isAnnual = annual;
+        if (annual) {
+          btnAnnual.classList.add('bg-neon-lime', 'text-black', 'shadow-neon-lime');
+          btnAnnual.classList.remove('text-neutral-400');
+          btnMonthly.classList.remove('bg-neon-lime', 'text-black', 'shadow-neon-lime');
+          btnMonthly.classList.add('text-neutral-400');
+
+          prices.forEach(el => {
+            const annualVal = el.getAttribute('data-annual');
+            gsap.to(el, {
+              opacity: 0,
+              y: -8,
+              duration: 0.15,
+              onComplete: () => {
+                el.textContent = annualVal;
+                gsap.to(el, { opacity: 1, y: 0, duration: 0.2 });
+              }
+            });
+          });
+
+          billingNotes.forEach(el => {
+            el.textContent = 'Billed annually ($' + (parseInt(el.closest('.tilt-card').querySelector('.tier-price').getAttribute('data-annual')) * 12) + '/yr). Save 20%.';
+          });
+        } else {
+          btnMonthly.classList.add('bg-neon-lime', 'text-black', 'shadow-neon-lime');
+          btnMonthly.classList.remove('text-neutral-400');
+          btnAnnual.classList.remove('bg-neon-lime', 'text-black', 'shadow-neon-lime');
+          btnAnnual.classList.add('text-neutral-400');
+
+          prices.forEach(el => {
+            const monthlyVal = el.getAttribute('data-monthly');
+            gsap.to(el, {
+              opacity: 0,
+              y: 8,
+              duration: 0.15,
+              onComplete: () => {
+                el.textContent = monthlyVal;
+                gsap.to(el, { opacity: 1, y: 0, duration: 0.2 });
+              }
+            });
+          });
+
+          billingNotes[0].textContent = 'Billed monthly. Cancel anytime.';
+          billingNotes[1].textContent = 'Includes 24/7 RFID wristband access.';
+          billingNotes[2].textContent = 'All-inclusive VIP concierge service.';
+        }
+      }
+
+      if (btnMonthly && btnAnnual) {
+        btnMonthly.addEventListener('click', () => updateBilling(false));
+        btnAnnual.addEventListener('click', () => updateBilling(true));
+      }
+
+      // Connect plan selection buttons to openBookingModal
+      document.querySelectorAll('.trigger-plan-btn').forEach(btn => {
+        btn.addEventListener('click', () => {
+          const planName = btn.getAttribute('data-plan');
+          const price = isAnnual ? btn.closest('.tilt-card').querySelector('.tier-price').getAttribute('data-annual') : btn.getAttribute('data-price');
+          const billingCycle = isAnnual ? 'Annual Pass ($' + price + '/mo)' : 'Monthly ($' + price + '/mo)';
+          if (window.openBookingModal) {
+            window.openBookingModal({
+              title: 'ENROLL: ' + planName.toUpperCase(),
+              subtitle: 'Selected Tier: ' + planName + ' - ' + billingCycle + '. Zero commitment fees.',
+              plan: planName,
+              category: 'Membership'
+            });
+          }
+        });
+      });
+    })();
+  </script>
+</body>
+</html>

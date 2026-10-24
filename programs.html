@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TRAINING DISCIPLINES // APEX ATHLETICS</title>
+  <meta name="description" content="Discover our elite training programs: Heavy Barbell Strength, Hypersonic HIIT, Hypertrophy Lab, Combat Strike MMA, and Cryo Cellular Reset.">
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><polygon points='50,5 95,90 5,90' fill='%23ccff00'/><polygon points='50,30 80,85 20,85' fill='%230b0b0b'/></svg>">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Anton&family=Bebas+Neue&family=Inter:wght@300;400;500;600;700;800;900&family=Syne:wght@700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            'dark-bg': '#0b0b0b',
+            'dark-surface': '#141414',
+            'dark-card': '#191919',
+            'neon-lime': '#ccff00',
+            'neon-crimson': '#ff3344',
+            'neon-cyan': '#00f0ff',
+          },
+          fontFamily: {
+            sans: ['Inter', 'sans-serif'],
+            display: ['Syne', 'Anton', 'sans-serif'],
+            bebas: ['"Bebas Neue"', 'sans-serif'],
+          }
+        }
+      }
+    };
+  </script>
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body class="bg-dark-bg text-neutral-100 selection:bg-neon-lime selection:text-black antialiased">
+
+  <!-- CUSTOM CURSOR -->
+  <div id="cursor-dot" class="custom-cursor-dot" aria-hidden="true"></div>
+  <div id="cursor-outline" class="custom-cursor-outline" aria-hidden="true"></div>
+
+  <!-- STICKY GLASS NAVBAR -->
+  <header id="main-navbar" class="fixed top-0 left-0 w-full z-50 transition-all duration-300 py-3.5 sm:py-4 px-4 sm:px-6 lg:px-8 bg-black/80 backdrop-blur-md border-b border-white/5">
+    <div class="max-w-7xl mx-auto flex items-center justify-between gap-4">
+      
+      <a href="index.html" class="flex items-center gap-2.5 sm:gap-3 group focus:outline-none flex-shrink-0" aria-label="Apex Athletics Home">
+        <div class="w-9 h-9 sm:w-10 sm:h-10 rounded-xl bg-neon-lime flex items-center justify-center font-display font-black text-black text-lg sm:text-xl shadow-[0_0_15px_rgba(204,255,0,0.5)] group-hover:scale-105 group-hover:rotate-3 transition-transform">
+          <i class="fa-solid fa-bolt"></i>
+        </div>
+        <div class="flex flex-col">
+          <span class="font-display font-extrabold text-lg sm:text-xl tracking-tight text-white group-hover:text-neon-lime transition-colors">
+            APEX<span class="text-neon-lime font-black"> // </span>ATHLETICS
+          </span>
+          <span class="text-[9px] sm:text-[10px] tracking-[0.25em] uppercase text-neutral-400 font-semibold">Performance Lab</span>
+        </div>
+      </a>
+
+      <nav class="hidden xl:flex items-center gap-6 2xl:gap-8 text-xs 2xl:text-sm font-semibold tracking-wider uppercase text-neutral-300">
+        <a href="index.html" class="nav-link hover:text-white transition-colors">Home</a>
+        <a href="programs.html" class="nav-link text-neon-lime transition-colors">Programs</a>
+        <a href="schedule.html" class="nav-link hover:text-white transition-colors">Schedule</a>
+        <a href="facilities.html" class="nav-link hover:text-white transition-colors">Arsenal</a>
+        <a href="coaches.html" class="nav-link hover:text-white transition-colors">Coaches</a>
+        <a href="pricing.html" class="nav-link hover:text-white transition-colors">Pricing</a>
+        <a href="calculator.html" class="nav-link hover:text-white transition-colors">Lab Calc</a>
+        <a href="admin-login.html" class="nav-link text-neutral-400 hover:text-neon-lime transition-colors flex items-center gap-1.5" title="Admin Control Portal">
+          <i class="fa-solid fa-shield-halved text-xs text-neon-lime"></i> Admin
+        </a>
+      </nav>
+
+      <div class="flex items-center gap-2.5 sm:gap-3.5 flex-shrink-0">
+        <button id="audio-toggle-btn" class="hidden sm:flex items-center gap-2 px-3 py-1.5 rounded-full border border-neutral-800 bg-neutral-900/60 text-xs font-mono font-medium hover:border-neutral-600 transition-colors" title="Toggle Sound">
+          <i id="audio-icon" class="fa-solid fa-volume-xmark text-neutral-400"></i>
+          <span id="audio-status-text" class="text-neutral-400">SFX: OFF</span>
+        </button>
+
+        <button class="trigger-join-modal btn-magnetic btn-shine px-4 sm:px-6 py-2 sm:py-2.5 rounded-full bg-neon-lime text-black font-display font-black text-xs sm:text-sm tracking-wider uppercase shadow-neon-lime hover:scale-105 active:scale-95 transition-all">
+          <span>Join Now</span>
+        </button>
+
+        <button id="mobile-menu-toggle" class="xl:hidden w-10 h-10 flex flex-col items-center justify-center gap-1.5 rounded-xl bg-neutral-900 border border-neutral-800" aria-label="Toggle Navigation Menu">
+          <span id="ham-line-1" class="w-5 sm:w-6 h-0.5 bg-neutral-200 transition-all"></span>
+          <span id="ham-line-2" class="w-5 sm:w-6 h-0.5 bg-neutral-200 transition-all"></span>
+          <span id="ham-line-3" class="w-3.5 sm:w-4 h-0.5 bg-neon-lime self-start ml-2 sm:ml-2.5 transition-all"></span>
+        </button>
+      </div>
+
+    </div>
+  </header>
+
+  <!-- MOBILE MENU OVERLAY -->
+  <div id="mobile-menu-overlay" class="fixed inset-0 z-40 bg-black/95 backdrop-blur-2xl hidden flex-col justify-between px-6 py-24 overflow-y-auto" aria-modal="true" role="dialog">
+    <div class="flex flex-col gap-6">
+      <span class="text-xs font-mono tracking-widest uppercase text-neon-lime">// NAVIGATION PROTOCOL</span>
+      <nav class="flex flex-col gap-3 font-display font-black text-2xl sm:text-3xl uppercase tracking-wider">
+        <a href="index.html" class="mobile-nav-link text-neutral-300 hover:text-neon-lime">00. Home</a>
+        <a href="programs.html" class="mobile-nav-link text-neon-lime">01. Programs</a>
+        <a href="schedule.html" class="mobile-nav-link text-neutral-300 hover:text-neon-lime">02. Schedule</a>
+        <a href="facilities.html" class="mobile-nav-link text-neutral-300 hover:text-neon-lime">03. Arsenal & Amenities</a>
+        <a href="coaches.html" class="mobile-nav-link text-neutral-300 hover:text-neon-lime">04. Elite Coaches</a>
+        <a href="pricing.html" class="mobile-nav-link text-neutral-300 hover:text-neon-lime">05. Membership Tiers</a>
+        <a href="calculator.html" class="mobile-nav-link text-neutral-300 hover:text-neon-lime">06. Athletic Calculator</a>
+        <a href="admin-login.html" class="mobile-nav-link text-neutral-400 hover:text-neon-lime flex items-center gap-2 text-xl pt-2 border-t border-neutral-800">
+          <i class="fa-solid fa-shield-halved text-neon-lime text-base"></i> 07. Admin Portal
+        </a>
+      </nav>
+    </div>
+
+    <div class="flex flex-col gap-4 pt-6 border-t border-neutral-800">
+      <button class="trigger-join-modal mobile-menu-item w-full py-4 rounded-xl bg-neon-lime text-black font-display font-black text-center text-base sm:text-lg uppercase tracking-wider shadow-neon-lime">
+        Claim 7-Day VIP Pass
+      </button>
+    </div>
+  </div>
+
+  <main class="pt-32 pb-24 px-4 sm:px-8 max-w-7xl mx-auto">
+    
+    <!-- PAGE HERO HEADER -->
+    <div class="mb-16">
+      <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-neon-lime/10 border border-neon-lime/30 text-neon-lime font-mono text-xs font-bold uppercase tracking-widest mb-4">
+        <i class="fa-solid fa-cubes"></i> DISCIPLINE BLUEPRINTS
+      </div>
+      <h1 class="font-display font-black text-4xl sm:text-6xl lg:text-7xl uppercase tracking-tight text-white">
+        TRAINING <span class="text-transparent bg-clip-text bg-gradient-to-r from-neon-lime via-white to-neon-lime neon-text-lime">DOMAINS</span>
+      </h1>
+      <p class="max-w-2xl text-neutral-400 text-sm sm:text-base mt-4 leading-relaxed">
+        Our training domains are not random group fitness routines. Each protocol is structured on exercise physiology, conjugate periodization, and metabolic conditioning.
+      </p>
+    </div>
+
+    <!-- PROGRAMS GRID (3D TILT CARDS) -->
+    <div id="programs-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+      
+      <!-- Program 1 -->
+      <div class="tilt-card rounded-2xl overflow-hidden glass-panel border border-neutral-800 hover:border-neon-lime/50 transition-all duration-300 flex flex-col group">
+        <div class="relative h-64 overflow-hidden">
+          <img src="https://images.unsplash.com/photo-1581009146145-b5ef050c2e1e?q=80&w=800&auto=format&fit=crop" alt="Heavy Strength" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700 filter brightness-75 group-hover:brightness-90">
+          <div class="absolute inset-0 bg-gradient-to-t from-dark-card via-transparent to-black/40"></div>
+          <span class="absolute top-4 left-4 px-3 py-1 rounded-full text-xs font-mono font-bold uppercase bg-black/80 border border-neutral-700 text-white backdrop-blur-md">Zone: Pit 1 & 2</span>
+          <span class="absolute bottom-4 right-4 px-2.5 py-1 rounded-md text-xs font-bold uppercase bg-neon-lime text-black">High Intensity</span>
+        </div>
+        <div class="p-6 flex-1 flex flex-col justify-between bg-dark-card">
+          <div>
+            <span class="text-xs font-mono text-neon-lime uppercase flex items-center gap-1.5 mb-2"><i class="fa-solid fa-dumbbell"></i> Barbell Calibration</span>
+            <h3 class="font-display font-extrabold text-2xl uppercase tracking-wide text-white group-hover:text-neon-lime transition-colors">Iron Forge: Heavy Strength</h3>
+            <p class="text-neutral-400 text-sm mt-3 leading-relaxed">Periodized conjugate & linear training utilizing competition calibrated plates, Eleiko bars, and velocity transducers for maximal neurological recruitment.</p>
+          </div>
+          <div class="mt-6 pt-4 border-t border-neutral-800 flex items-center justify-between text-xs font-mono text-neutral-400">
+            <span>⏱ 75 MIN / SESSION</span>
+            <button class="view-program-btn text-white font-bold uppercase hover:text-neon-lime flex items-center gap-1" data-program="Iron Forge: Heavy Strength">Book Spot <i class="fa-solid fa-angle-right"></i></button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Program 2 -->
+      <div class="tilt-card rounded-2xl overflow-hidden glass-panel border border-neutral-800 hover:border-amber-400/50 transition-all duration-300 flex flex-col group">
+        <div class="relative h-64 overflow-hidden">
+          <img src="https://images.unsplash.com/photo-1518611012118-696072aa579a?q=80&w=800&auto=format&fit=crop" alt="HIIT" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700 filter brightness-75 group-hover:brightness-90">
+          <div class="absolute inset-0 bg-gradient-to-t from-dark-card via-transparent to-black/40"></div>
+          <span class="absolute top-4 left-4 px-3 py-1 rounded-full text-xs font-mono font-bold uppercase bg-black/80 border border-neutral-700 text-white backdrop-blur-md">Zone: Turf Alpha</span>
+          <span class="absolute bottom-4 right-4 px-2.5 py-1 rounded-md text-xs font-bold uppercase bg-amber-400 text-black">Max VO2 Pulse</span>
+        </div>
+        <div class="p-6 flex-1 flex flex-col justify-between bg-dark-card">
+          <div>
+            <span class="text-xs font-mono text-amber-400 uppercase flex items-center gap-1.5 mb-2"><i class="fa-solid fa-fire"></i> Anaerobic Furnace</span>
+            <h3 class="font-display font-extrabold text-2xl uppercase tracking-wide text-white group-hover:text-amber-400 transition-colors">Hypersonic HIIT Conditioning</h3>
+            <p class="text-neutral-400 text-sm mt-3 leading-relaxed">High-output intervals combining curved motorized treadmills, SkiErgs, assault bikes, and prowler sled pushes calibrated to elevate EPOC metabolism.</p>
+          </div>
+          <div class="mt-6 pt-4 border-t border-neutral-800 flex items-center justify-between text-xs font-mono text-neutral-400">
+            <span>⏱ 50 MIN / SESSION</span>
+            <button class="view-program-btn text-white font-bold uppercase hover:text-amber-400 flex items-center gap-1" data-program="Hypersonic HIIT Conditioning">Book Spot <i class="fa-solid fa-angle-right"></i></button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Program 3 -->
+      <div class="tilt-card rounded-2xl overflow-hidden glass-panel border border-neutral-800 hover:border-neon-lime/50 transition-all duration-300 flex flex-col group">
+        <div class="relative h-64 overflow-hidden">
+          <img src="https://images.unsplash.com/photo-1583454110551-21f2fa2afe61?q=80&w=800&auto=format&fit=crop" alt="Hypertrophy" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700 filter brightness-75 group-hover:brightness-90">
+          <div class="absolute inset-0 bg-gradient-to-t from-dark-card via-transparent to-black/40"></div>
+          <span class="absolute top-4 left-4 px-3 py-1 rounded-full text-xs font-mono font-bold uppercase bg-black/80 border border-neutral-700 text-white backdrop-blur-md">Zone: Prime Machines</span>
+          <span class="absolute bottom-4 right-4 px-2.5 py-1 rounded-md text-xs font-bold uppercase bg-neon-lime text-black">Hypertrophic</span>
+        </div>
+        <div class="p-6 flex-1 flex flex-col justify-between bg-dark-card">
+          <div>
+            <span class="text-xs font-mono text-neon-lime uppercase flex items-center gap-1.5 mb-2"><i class="fa-solid fa-dna"></i> Biomechanics & Tension</span>
+            <h3 class="font-display font-extrabold text-2xl uppercase tracking-wide text-white group-hover:text-neon-lime transition-colors">Anabolic Hypertrophy Lab</h3>
+            <p class="text-neutral-400 text-sm mt-3 leading-relaxed">Pinpoint muscle isolation and tension profile matching utilizing Prime Fitness converging equipment, lengthened partials, and micro-progression tracking.</p>
+          </div>
+          <div class="mt-6 pt-4 border-t border-neutral-800 flex items-center justify-between text-xs font-mono text-neutral-400">
+            <span>⏱ 65 MIN / SESSION</span>
+            <button class="view-program-btn text-white font-bold uppercase hover:text-neon-lime flex items-center gap-1" data-program="Anabolic Hypertrophy Lab">Book Spot <i class="fa-solid fa-angle-right"></i></button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Program 4 -->
+      <div class="tilt-card rounded-2xl overflow-hidden glass-panel border border-neutral-800 hover:border-red-500/50 transition-all duration-300 flex flex-col group">
+        <div class="relative h-64 overflow-hidden">
+          <img src="https://images.unsplash.com/photo-1549719386-74dfcbf7dbed?q=80&w=800&auto=format&fit=crop" alt="Boxing MMA" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700 filter brightness-75 group-hover:brightness-90">
+          <div class="absolute inset-0 bg-gradient-to-t from-dark-card via-transparent to-black/40"></div>
+          <span class="absolute top-4 left-4 px-3 py-1 rounded-full text-xs font-mono font-bold uppercase bg-black/80 border border-neutral-700 text-white backdrop-blur-md">Zone: Octagon Cage</span>
+          <span class="absolute bottom-4 right-4 px-2.5 py-1 rounded-md text-xs font-bold uppercase bg-red-600 text-white">Combat Strike</span>
+        </div>
+        <div class="p-6 flex-1 flex flex-col justify-between bg-dark-card">
+          <div>
+            <span class="text-xs font-mono text-neon-crimson uppercase flex items-center gap-1.5 mb-2"><i class="fa-solid fa-hand-fist"></i> Footwork & Power</span>
+            <h3 class="font-display font-extrabold text-2xl uppercase tracking-wide text-white group-hover:text-neon-crimson transition-colors">Apex Combat & Striking</h3>
+            <p class="text-neutral-400 text-sm mt-3 leading-relaxed">Pro-level striking mechanics, heavy bag rounds, defensive evasion, and anaerobic combative endurance overseen by championship-grade fighters.</p>
+          </div>
+          <div class="mt-6 pt-4 border-t border-neutral-800 flex items-center justify-between text-xs font-mono text-neutral-400">
+            <span>⏱ 60 MIN / SESSION</span>
+            <button class="view-program-btn text-white font-bold uppercase hover:text-neon-crimson flex items-center gap-1" data-program="Apex Combat & Striking">Book Spot <i class="fa-solid fa-angle-right"></i></button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Program 5 -->
+      <div class="tilt-card rounded-2xl overflow-hidden glass-panel border border-neutral-800 hover:border-cyan-400/50 transition-all duration-300 flex flex-col group">
+        <div class="relative h-64 overflow-hidden">
+          <img src="https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?q=80&w=800&auto=format&fit=crop" alt="Cryo Recovery" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700 filter brightness-75 group-hover:brightness-90">
+          <div class="absolute inset-0 bg-gradient-to-t from-dark-card via-transparent to-black/40"></div>
+          <span class="absolute top-4 left-4 px-3 py-1 rounded-full text-xs font-mono font-bold uppercase bg-black/80 border border-neutral-700 text-white backdrop-blur-md">Zone: Cryo Sanctuary</span>
+          <span class="absolute bottom-4 right-4 px-2.5 py-1 rounded-md text-xs font-bold uppercase bg-cyan-400 text-black">Regenerative</span>
+        </div>
+        <div class="p-6 flex-1 flex flex-col justify-between bg-dark-card">
+          <div>
+            <span class="text-xs font-mono text-neon-cyan uppercase flex items-center gap-1.5 mb-2"><i class="fa-solid fa-snowflake"></i> Contrast & Reset</span>
+            <h3 class="font-display font-extrabold text-2xl uppercase tracking-wide text-white group-hover:text-neon-cyan transition-colors">Cryo & Cellular Reset</h3>
+            <p class="text-neutral-400 text-sm mt-3 leading-relaxed">Sub-zero full-body cryotherapy, Finnish cedar sauna contrast plunging, pneumatic Normatec compression, and targeted dynamic fascial mobility flow.</p>
+          </div>
+          <div class="mt-6 pt-4 border-t border-neutral-800 flex items-center justify-between text-xs font-mono text-neutral-400">
+            <span>⏱ 45 MIN / SESSION</span>
+            <button class="view-program-btn text-white font-bold uppercase hover:text-neon-cyan flex items-center gap-1" data-program="Cryo & Cellular Reset">Book Spot <i class="fa-solid fa-angle-right"></i></button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Program 6 -->
+      <div class="tilt-card rounded-2xl overflow-hidden glass-panel border border-neon-lime/40 bg-gradient-to-b from-neutral-900 to-black p-8 flex flex-col justify-between group">
+        <div>
+          <div class="w-12 h-12 rounded-xl bg-neon-lime/20 border border-neon-lime/40 text-neon-lime flex items-center justify-center text-xl mb-6 shadow-neon-lime">
+            <i class="fa-solid fa-crosshairs"></i>
+          </div>
+          <span class="text-xs font-mono font-bold uppercase text-neon-lime tracking-widest">// CUSTOM BLUEPRINT</span>
+          <h3 class="font-display font-black text-3xl uppercase tracking-wide text-white mt-2">Biometric Athletic Assessment</h3>
+          <p class="text-neutral-400 text-sm mt-4 leading-relaxed">Receive an InBody 770 body composition profile, dynamic movement screen (FMS), heart-rate recovery assessment, and custom training protocol blueprint.</p>
+        </div>
+        <div class="mt-8 pt-6 border-t border-neutral-800 flex items-center justify-between">
+          <span class="text-xs font-mono text-neutral-400">INCLUDED IN VIP PASS</span>
+          <button class="trigger-join-modal px-4 py-2 rounded-lg bg-neon-lime text-black font-display font-black text-xs uppercase tracking-wider hover:scale-105 transition-transform">Claim Assessment</button>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- CTA BANNER -->
+    <div class="mt-20 p-8 sm:p-12 rounded-3xl bg-neutral-900 border border-neutral-800 flex flex-col md:flex-row items-center justify-between gap-8">
+      <div>
+        <h3 class="font-display font-black text-2xl sm:text-4xl uppercase text-white">Ready to Test Your Output?</h3>
+        <p class="text-sm text-neutral-400 mt-2">Claim a 7-day all-access guest pass to any discipline of your choice.</p>
+      </div>
+      <button class="trigger-join-modal btn-magnetic btn-shine px-8 py-4 rounded-xl bg-neon-lime text-black font-display font-black text-sm uppercase tracking-wider shadow-neon-lime hover:scale-105 transition-transform flex-shrink-0">
+        Claim 7-Day Free Pass
+      </button>
+    </div>
+
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="bg-black border-t border-neutral-800 pt-16 pb-12 px-4 sm:px-8 text-neutral-400">
+    <div class="max-w-7xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-4 text-xs font-mono">
+      <span>© 2026 APEX ATHLETICS GROUP LLC. ALL RIGHTS RESERVED.</span>
+      <div class="flex items-center gap-6">
+        <a href="index.html" class="hover:text-white transition-colors">HOME</a>
+        <a href="schedule.html" class="hover:text-white transition-colors">SCHEDULE</a>
+        <a href="admin-login.html" class="hover:text-neon-lime transition-colors">ADMIN</a>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ACTION MODAL -->
+  <div id="action-modal" class="fixed inset-0 z-50 hidden flex items-center justify-center p-3 sm:p-4 overflow-y-auto" aria-modal="true" role="dialog">
+    <div id="modal-backdrop" class="fixed inset-0 bg-black/80 backdrop-blur-md"></div>
+    <div id="modal-content-box" class="relative z-10 w-full max-w-lg max-h-[92vh] overflow-y-auto rounded-2xl bg-dark-surface border border-neutral-800 p-5 sm:p-8 shadow-2xl my-auto">
+      <button id="modal-close-btn" class="absolute top-5 right-5 w-8 h-8 rounded-full bg-neutral-800 text-neutral-400 hover:text-white flex items-center justify-center transition-colors"><i class="fa-solid fa-xmark"></i></button>
+      <div class="mb-6">
+        <span class="text-xs font-mono font-bold uppercase tracking-widest text-neon-lime">// PROTOCOL CONFIRMATION</span>
+        <h3 id="modal-title" class="font-display font-black text-2xl sm:text-3xl uppercase tracking-wide text-white mt-1">CLAIM 7-DAY VIP PASS</h3>
+        <p id="modal-subtitle" class="text-xs text-neutral-400 mt-1">Experience full unrestricted access to Apex Athletics.</p>
+      </div>
+      <form id="modal-booking-form" class="space-y-4">
+        <div>
+          <label class="block text-xs font-mono font-bold uppercase text-neutral-300 mb-1">Full Legal Name</label>
+          <input type="text" id="modal-input-name" required placeholder="e.g. Alex Mercer" class="w-full px-4 py-3 rounded-xl bg-neutral-900 border border-neutral-800 focus:border-neon-lime focus:outline-none text-white text-sm">
+        </div>
+        <div>
+          <label class="block text-xs font-mono font-bold uppercase text-neutral-300 mb-1">Email Address</label>
+          <input type="email" id="modal-input-email" required placeholder="alex@domain.com" class="w-full px-4 py-3 rounded-xl bg-neutral-900 border border-neutral-800 focus:border-neon-lime focus:outline-none text-white text-sm">
+        </div>
+        <div>
+          <label class="block text-xs font-mono font-bold uppercase text-neutral-300 mb-1">Phone Number</label>
+          <input type="tel" id="modal-input-phone" placeholder="+1 (555) 000-0000" class="w-full px-4 py-3 rounded-xl bg-neutral-900 border border-neutral-800 focus:border-neon-lime focus:outline-none text-white text-sm">
+        </div>
+        <button type="submit" class="btn-magnetic btn-shine w-full py-4 rounded-xl bg-neon-lime text-black font-display font-black text-sm uppercase tracking-wider shadow-neon-lime hover:scale-[1.02] transition-transform">Confirm & Sync to Database</button>
+      </form>
+      <div id="modal-confirmation-state" class="hidden text-center py-4">
+        <div class="w-16 h-16 rounded-full bg-neon-lime/20 border border-neon-lime text-neon-lime flex items-center justify-center text-3xl mx-auto mb-4 shadow-neon-lime"><i class="fa-solid fa-check"></i></div>
+        <h4 class="font-display font-black text-2xl uppercase text-white">ACCESS GRANTED</h4>
+        <p class="text-xs text-neutral-400 mt-1">Stored securely in cloud database.</p>
+        <div class="mt-6 p-5 rounded-xl bg-black border border-neon-lime/40 text-left font-mono">
+          <div class="flex items-center justify-between pb-3 border-b border-neutral-800"><span class="text-xs text-neon-lime font-bold">APEX // SMART PASS</span><span class="text-[10px] text-neutral-400">ACTIVE 2026</span></div>
+          <div class="py-3"><p class="text-[10px] text-neutral-500 uppercase">ATHLETE NAME</p><p id="confirm-pass-holder" class="font-bold text-white text-sm">ALEX MERCER</p></div>
+          <div class="flex items-center justify-between pt-2 border-t border-neutral-800"><div><p class="text-[10px] text-neutral-500">DIGITAL KEY ID</p><p id="confirm-pass-code" class="text-xs text-neon-lime font-bold">APX-928411</p></div><i class="fa-solid fa-qrcode text-white text-xl"></i></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="js/supabase-client.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script src="js/main.js"></script>
+</body>
+</html>

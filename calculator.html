@@ -1,0 +1,607 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>DIAGNOSTIC MACRO LAB & ATHLETIC CALCULATOR // APEX ATHLETICS</title>
+  <meta name="description" content="Calculate your athletic BMR, TDEE, precision macronutrient split, and BMI. Tailored performance nutrition algorithms powered by Apex Athletics.">
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><polygon points='50,5 95,90 5,90' fill='%23ccff00'/><polygon points='50,30 80,85 20,85' fill='%230b0b0b'/></svg>">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Anton&family=Bebas+Neue&family=Inter:wght@300;400;500;600;700;800;900&family=Syne:wght@700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            'dark-bg': '#0b0b0b',
+            'dark-surface': '#141414',
+            'dark-card': '#191919',
+            'neon-lime': '#ccff00',
+            'neon-crimson': '#ff3344',
+            'neon-cyan': '#00f0ff',
+          },
+          fontFamily: {
+            sans: ['Inter', 'sans-serif'],
+            display: ['Syne', 'Anton', 'sans-serif'],
+            bebas: ['"Bebas Neue"', 'sans-serif'],
+          }
+        }
+      }
+    };
+  </script>
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body class="bg-dark-bg text-neutral-100 selection:bg-neon-lime selection:text-black antialiased">
+
+  <!-- CUSTOM CURSOR -->
+  <div id="cursor-dot" class="custom-cursor-dot" aria-hidden="true"></div>
+  <div id="cursor-outline" class="custom-cursor-outline" aria-hidden="true"></div>
+
+  <!-- STICKY GLASS NAVBAR -->
+  <header id="main-navbar" class="fixed top-0 left-0 w-full z-50 transition-all duration-300 py-3.5 sm:py-4 px-4 sm:px-6 lg:px-8 bg-black/80 backdrop-blur-md border-b border-white/5">
+    <div class="max-w-7xl mx-auto flex items-center justify-between gap-4">
+      
+      <a href="index.html" class="flex items-center gap-2.5 sm:gap-3 group focus:outline-none flex-shrink-0" aria-label="Apex Athletics Home">
+        <div class="w-9 h-9 sm:w-10 sm:h-10 rounded-xl bg-neon-lime flex items-center justify-center font-display font-black text-black text-lg sm:text-xl shadow-[0_0_15px_rgba(204,255,0,0.5)] group-hover:scale-105 group-hover:rotate-3 transition-transform">
+          <i class="fa-solid fa-bolt"></i>
+        </div>
+        <div class="flex flex-col">
+          <span class="font-display font-extrabold text-lg sm:text-xl tracking-tight text-white group-hover:text-neon-lime transition-colors">
+            APEX<span class="text-neon-lime font-black"> // </span>ATHLETICS
+          </span>
+          <span class="text-[9px] sm:text-[10px] tracking-[0.25em] uppercase text-neutral-400 font-semibold">Performance Lab</span>
+        </div>
+      </a>
+
+      <nav class="hidden xl:flex items-center gap-6 2xl:gap-8 text-xs 2xl:text-sm font-semibold tracking-wider uppercase text-neutral-300">
+        <a href="index.html" class="nav-link hover:text-white transition-colors">Home</a>
+        <a href="programs.html" class="nav-link hover:text-white transition-colors">Programs</a>
+        <a href="schedule.html" class="nav-link hover:text-white transition-colors">Schedule</a>
+        <a href="facilities.html" class="nav-link hover:text-white transition-colors">Arsenal</a>
+        <a href="coaches.html" class="nav-link hover:text-white transition-colors">Coaches</a>
+        <a href="pricing.html" class="nav-link hover:text-white transition-colors">Pricing</a>
+        <a href="calculator.html" class="nav-link text-neon-lime transition-colors">Lab Calc</a>
+        <a href="admin-login.html" class="nav-link text-neutral-400 hover:text-neon-lime transition-colors flex items-center gap-1.5" title="Admin Control Portal">
+          <i class="fa-solid fa-shield-halved text-xs text-neon-lime"></i> Admin
+        </a>
+      </nav>
+
+      <div class="flex items-center gap-2.5 sm:gap-3.5 flex-shrink-0">
+        <button id="audio-toggle-btn" class="hidden sm:flex items-center gap-2 px-3 py-1.5 rounded-full border border-neutral-800 bg-neutral-900/60 text-xs font-mono font-medium hover:border-neutral-600 transition-colors" title="Toggle Sound">
+          <i id="audio-icon" class="fa-solid fa-volume-xmark text-neutral-400"></i>
+          <span id="audio-status-text" class="text-neutral-400">SFX: OFF</span>
+        </button>
+
+        <button class="trigger-join-modal btn-magnetic btn-shine px-4 sm:px-6 py-2 sm:py-2.5 rounded-full bg-neon-lime text-black font-display font-black text-xs sm:text-sm tracking-wider uppercase shadow-neon-lime hover:scale-105 active:scale-95 transition-all">
+          <span>Join Now</span>
+        </button>
+
+        <button id="mobile-menu-toggle" class="xl:hidden w-10 h-10 flex flex-col items-center justify-center gap-1.5 rounded-xl bg-neutral-900 border border-neutral-800" aria-label="Toggle Navigation Menu">
+          <span id="ham-line-1" class="w-5 sm:w-6 h-0.5 bg-neutral-200 transition-all"></span>
+          <span id="ham-line-2" class="w-5 sm:w-6 h-0.5 bg-neutral-200 transition-all"></span>
+          <span id="ham-line-3" class="w-3.5 sm:w-4 h-0.5 bg-neon-lime self-start ml-2 sm:ml-2.5 transition-all"></span>
+        </button>
+      </div>
+
+    </div>
+  </header>
+
+  <!-- MOBILE MENU OVERLAY -->
+  <div id="mobile-menu-overlay" class="fixed inset-0 z-40 bg-black/95 backdrop-blur-2xl hidden flex-col justify-between px-6 py-24 overflow-y-auto" aria-modal="true" role="dialog">
+    <div class="flex flex-col gap-6">
+      <span class="text-xs font-mono tracking-widest uppercase text-neon-lime">// NAVIGATION PROTOCOL</span>
+      <nav class="flex flex-col gap-3 font-display font-black text-2xl sm:text-3xl uppercase tracking-wider">
+        <a href="index.html" class="mobile-nav-link text-neutral-300 hover:text-neon-lime">00. Home</a>
+        <a href="programs.html" class="mobile-nav-link text-neutral-300 hover:text-neon-lime">01. Programs</a>
+        <a href="schedule.html" class="mobile-nav-link text-neutral-300 hover:text-neon-lime">02. Schedule</a>
+        <a href="facilities.html" class="mobile-nav-link text-neutral-300 hover:text-neon-lime">03. Arsenal & Amenities</a>
+        <a href="coaches.html" class="mobile-nav-link text-neutral-300 hover:text-neon-lime">04. Elite Coaches</a>
+        <a href="pricing.html" class="mobile-nav-link text-neutral-300 hover:text-neon-lime">05. Membership Tiers</a>
+        <a href="calculator.html" class="mobile-nav-link text-neon-lime">06. Athletic Calculator</a>
+        <a href="admin-login.html" class="mobile-nav-link text-neutral-400 hover:text-neon-lime flex items-center gap-2 text-xl pt-2 border-t border-neutral-800">
+          <i class="fa-solid fa-shield-halved text-neon-lime text-base"></i> 07. Admin Portal
+        </a>
+      </nav>
+    </div>
+
+    <div class="flex flex-col gap-4 pt-6 border-t border-neutral-800">
+      <button class="trigger-join-modal mobile-menu-item w-full py-4 rounded-xl bg-neon-lime text-black font-display font-black text-center text-base sm:text-lg uppercase tracking-wider shadow-neon-lime">
+        Claim 7-Day VIP Pass
+      </button>
+    </div>
+  </div>
+
+  <main class="pt-32 pb-24 px-4 sm:px-8 max-w-7xl mx-auto">
+    
+    <!-- PAGE HERO HEADER -->
+    <div class="mb-12">
+      <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-neon-lime/10 border border-neon-lime/30 text-neon-lime font-mono text-xs font-bold uppercase tracking-widest mb-4">
+        <i class="fa-solid fa-calculator"></i> BIOMETRIC ALGORITHMS
+      </div>
+      <h1 class="font-display font-black text-4xl sm:text-6xl lg:text-7xl uppercase tracking-tight text-white">
+        DIAGNOSTIC <span class="text-transparent bg-clip-text bg-gradient-to-r from-neon-lime via-white to-neon-lime neon-text-lime">MACRO LAB</span>
+      </h1>
+      <p class="max-w-2xl text-neutral-400 text-sm sm:text-base mt-4 leading-relaxed">
+        Input your biometric parameters to instantly calculate your Basal Metabolic Rate (BMR), Total Daily Energy Expenditure (TDEE), and exact macronutrient split for your athletic goals.
+      </p>
+    </div>
+
+    <!-- CALCULATOR WRAPPER (2-COLUMN GRID) -->
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+      
+      <!-- FORM COLUMN (5 COLUMNS) -->
+      <div class="lg:col-span-5 rounded-2xl glass-panel border border-neutral-800 p-6 sm:p-8 bg-dark-card shadow-2xl">
+        
+        <div class="flex items-center justify-between pb-6 mb-6 border-b border-neutral-800">
+          <span class="text-xs font-mono font-bold uppercase text-white flex items-center gap-2">
+            <i class="fa-solid fa-sliders text-neon-lime"></i> Athlete Inputs
+          </span>
+
+          <!-- UNIT TOGGLE -->
+          <div class="flex items-center p-1 rounded-lg bg-neutral-900 border border-neutral-800 text-[11px] font-mono">
+            <button id="unit-metric" class="px-2.5 py-1 rounded bg-neon-lime text-black font-bold">METRIC (KG/CM)</button>
+            <button id="unit-imperial" class="px-2.5 py-1 rounded text-neutral-400 hover:text-white font-bold">IMPERIAL (LBS)</button>
+          </div>
+        </div>
+
+        <form id="calc-form" class="space-y-5" onsubmit="event.preventDefault();">
+          
+          <!-- GENDER -->
+          <div>
+            <label class="block text-xs font-mono uppercase text-neutral-400 mb-2 font-bold">Gender Identity</label>
+            <div class="grid grid-cols-2 gap-3">
+              <label class="cursor-pointer">
+                <input type="radio" name="gender" value="male" checked class="peer sr-only">
+                <div class="p-3 rounded-xl border border-neutral-800 peer-checked:border-neon-lime peer-checked:bg-neon-lime/10 text-center font-mono text-xs font-bold uppercase transition-all">
+                  <i class="fa-solid fa-mars mr-1 text-neon-lime"></i> Male
+                </div>
+              </label>
+              <label class="cursor-pointer">
+                <input type="radio" name="gender" value="female" class="peer sr-only">
+                <div class="p-3 rounded-xl border border-neutral-800 peer-checked:border-neon-lime peer-checked:bg-neon-lime/10 text-center font-mono text-xs font-bold uppercase transition-all">
+                  <i class="fa-solid fa-venus mr-1 text-neon-lime"></i> Female
+                </div>
+              </label>
+            </div>
+          </div>
+
+          <!-- AGE & WEIGHT ROW -->
+          <div class="grid grid-cols-2 gap-4">
+            <div>
+              <label class="block text-xs font-mono uppercase text-neutral-400 mb-1 font-bold">Age (Years)</label>
+              <input type="number" id="input-age" value="28" min="14" max="95" class="w-full px-4 py-3 rounded-xl bg-neutral-900 border border-neutral-800 text-white font-mono text-sm focus:border-neon-lime focus:outline-none">
+            </div>
+            <div>
+              <label id="weight-label" class="block text-xs font-mono uppercase text-neutral-400 mb-1 font-bold">Weight (KG)</label>
+              <input type="number" id="input-weight" value="82" min="30" max="300" step="0.5" class="w-full px-4 py-3 rounded-xl bg-neutral-900 border border-neutral-800 text-white font-mono text-sm focus:border-neon-lime focus:outline-none">
+            </div>
+          </div>
+
+          <!-- HEIGHT -->
+          <div>
+            <label id="height-label" class="block text-xs font-mono uppercase text-neutral-400 mb-1 font-bold">Height (CM)</label>
+            <input type="number" id="input-height" value="180" min="100" max="250" class="w-full px-4 py-3 rounded-xl bg-neutral-900 border border-neutral-800 text-white font-mono text-sm focus:border-neon-lime focus:outline-none">
+          </div>
+
+          <!-- ACTIVITY LEVEL -->
+          <div>
+            <label class="block text-xs font-mono uppercase text-neutral-400 mb-1 font-bold">Weekly Activity Multiplier</label>
+            <select id="input-activity" class="w-full px-4 py-3 rounded-xl bg-neutral-900 border border-neutral-800 text-white font-sans text-xs sm:text-sm focus:border-neon-lime focus:outline-none">
+              <option value="1.2">Sedentary (Desk work, little exercise)</option>
+              <option value="1.375">Light Activity (1-3 gym sessions / week)</option>
+              <option value="1.55" selected>Moderate Activity (3-5 intense workouts / week)</option>
+              <option value="1.725">Very High Activity (6-7 intense sessions / week)</option>
+              <option value="1.9">Elite Competitive (Twice a day + conditioning)</option>
+            </select>
+          </div>
+
+          <!-- PRIMARY GOAL -->
+          <div>
+            <label class="block text-xs font-mono uppercase text-neutral-400 mb-1 font-bold">Primary Athletic Objective</label>
+            <select id="input-goal" class="w-full px-4 py-3 rounded-xl bg-neutral-900 border border-neutral-800 text-white font-sans text-xs sm:text-sm focus:border-neon-lime focus:outline-none">
+              <option value="hypertrophy" selected>Lean Hypertrophy (Muscle Gain + 350 kcal)</option>
+              <option value="shred">Aggressive Fat Shred (Cut - 500 kcal)</option>
+              <option value="recomp">Body Recomposition (Maintenance ± 0 kcal)</option>
+              <option value="strength">Peak Absolute Strength & Power (+ 450 kcal)</option>
+            </select>
+          </div>
+
+          <button type="button" id="recalc-btn" class="btn-magnetic btn-shine w-full py-3.5 rounded-xl bg-neon-lime text-black font-display font-black text-xs uppercase tracking-wider shadow-neon-lime hover:scale-[1.02] transition-transform flex items-center justify-center gap-2">
+            <i class="fa-solid fa-bolt"></i> Calculate Metrics
+          </button>
+        </form>
+
+      </div>
+
+      <!-- RESULTS COLUMN (7 COLUMNS) -->
+      <div class="lg:col-span-7 flex flex-col gap-6">
+        
+        <!-- TOP SUMMARY CARDS (BMI, BMR, TDEE, TARGET CALORIES) -->
+        <div class="grid grid-cols-2 sm:grid-cols-4 gap-4">
+          
+          <div class="p-4 rounded-xl bg-neutral-900/80 border border-neutral-800">
+            <span class="text-[10px] font-mono uppercase text-neutral-400 font-bold block">BMI Score</span>
+            <span id="output-bmi" class="font-bebas text-3xl sm:text-4xl font-black text-white mt-1 block">25.3</span>
+            <span id="output-bmi-status" class="text-[10px] font-mono text-neon-lime font-bold uppercase">Optimal Range</span>
+          </div>
+
+          <div class="p-4 rounded-xl bg-neutral-900/80 border border-neutral-800">
+            <span class="text-[10px] font-mono uppercase text-neutral-400 font-bold block">Basal BMR</span>
+            <span id="output-bmr" class="font-bebas text-3xl sm:text-4xl font-black text-white mt-1 block">1,820</span>
+            <span class="text-[10px] font-mono text-neutral-500 font-bold">kcal at rest</span>
+          </div>
+
+          <div class="p-4 rounded-xl bg-neutral-900/80 border border-neutral-800">
+            <span class="text-[10px] font-mono uppercase text-neutral-400 font-bold block">Active TDEE</span>
+            <span id="output-tdee" class="font-bebas text-3xl sm:text-4xl font-black text-white mt-1 block">2,821</span>
+            <span class="text-[10px] font-mono text-neutral-500 font-bold">kcal burned/day</span>
+          </div>
+
+          <div class="p-4 rounded-xl bg-gradient-to-br from-neon-lime/20 to-black border border-neon-lime/50 shadow-neon-lime">
+            <span class="text-[10px] font-mono uppercase text-neon-lime font-bold block">Target Intake</span>
+            <span id="output-target-cals" class="font-bebas text-3xl sm:text-4xl font-black text-neon-lime mt-1 block">3,171</span>
+            <span id="output-goal-subtext" class="text-[10px] font-mono text-white font-bold">kcal/day (+350)</span>
+          </div>
+
+        </div>
+
+        <!-- MACRONUTRIENT BLUEPRINT BOX -->
+        <div class="rounded-2xl glass-panel border border-neutral-800 p-6 sm:p-8 bg-dark-card shadow-2xl">
+          <div class="flex items-center justify-between mb-6">
+            <div>
+              <span class="text-xs font-mono font-bold uppercase text-neon-lime">// ATHLETIC RATIO</span>
+              <h3 class="font-display font-black text-2xl uppercase text-white mt-1">DAILY MACRONUTRIENT SPLIT</h3>
+            </div>
+            <span class="px-3 py-1 rounded-full bg-neutral-900 border border-neutral-700 text-xs font-mono font-bold text-neutral-300">
+              Gram Precision
+            </span>
+          </div>
+
+          <!-- MACRO PROGRESS BAR -->
+          <div class="h-4 w-full bg-neutral-900 rounded-full overflow-hidden flex mb-6 p-0.5 border border-neutral-800">
+            <div id="bar-protein" class="bg-neon-lime h-full rounded-l-full transition-all duration-500" style="width: 30%;" title="Protein"></div>
+            <div id="bar-carbs" class="bg-neon-cyan h-full transition-all duration-500" style="width: 45%;" title="Carbohydrates"></div>
+            <div id="bar-fats" class="bg-neon-crimson h-full rounded-r-full transition-all duration-500" style="width: 25%;" title="Fats"></div>
+          </div>
+
+          <!-- 3 MACRO CARDS -->
+          <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+            
+            <!-- PROTEIN -->
+            <div class="p-5 rounded-xl bg-neutral-900/90 border border-neon-lime/30">
+              <div class="flex items-center justify-between mb-2">
+                <span class="text-xs font-mono font-bold uppercase text-neon-lime">Protein</span>
+                <span class="text-xs font-mono text-neutral-400">4 kcal/g</span>
+              </div>
+              <div class="flex items-baseline gap-1">
+                <span id="macro-protein-g" class="font-bebas text-4xl sm:text-5xl font-black text-white">180</span>
+                <span class="text-sm font-mono text-neutral-400 font-bold">g</span>
+              </div>
+              <p class="text-[11px] font-mono text-neutral-400 mt-2">
+                <span id="macro-protein-cal">720</span> kcal (30% intake)
+              </p>
+              <div class="mt-3 text-[10px] font-mono text-neon-lime">
+                ⚡ Muscle synthesis & repair
+              </div>
+            </div>
+
+            <!-- CARBS -->
+            <div class="p-5 rounded-xl bg-neutral-900/90 border border-neon-cyan/30">
+              <div class="flex items-center justify-between mb-2">
+                <span class="text-xs font-mono font-bold uppercase text-neon-cyan">Carbs</span>
+                <span class="text-xs font-mono text-neutral-400">4 kcal/g</span>
+              </div>
+              <div class="flex items-baseline gap-1">
+                <span id="macro-carbs-g" class="font-bebas text-4xl sm:text-5xl font-black text-white">357</span>
+                <span class="text-sm font-mono text-neutral-400 font-bold">g</span>
+              </div>
+              <p class="text-[11px] font-mono text-neutral-400 mt-2">
+                <span id="macro-carbs-cal">1,428</span> kcal (45% intake)
+              </p>
+              <div class="mt-3 text-[10px] font-mono text-neon-cyan">
+                ⚡ Glycogen & anaerobic power
+              </div>
+            </div>
+
+            <!-- FATS -->
+            <div class="p-5 rounded-xl bg-neutral-900/90 border border-neon-crimson/30">
+              <div class="flex items-center justify-between mb-2">
+                <span class="text-xs font-mono font-bold uppercase text-neon-crimson">Fats</span>
+                <span class="text-xs font-mono text-neutral-400">9 kcal/g</span>
+              </div>
+              <div class="flex items-baseline gap-1">
+                <span id="macro-fats-g" class="font-bebas text-4xl sm:text-5xl font-black text-white">88</span>
+                <span class="text-sm font-mono text-neutral-400 font-bold">g</span>
+              </div>
+              <p class="text-[11px] font-mono text-neutral-400 mt-2">
+                <span id="macro-fats-cal">792</span> kcal (25% intake)
+              </p>
+              <div class="mt-3 text-[10px] font-mono text-neon-crimson">
+                ⚡ Hormone balance & joints
+              </div>
+            </div>
+
+          </div>
+
+          <!-- RECOMMENDED TRAINING PROTOCOL -->
+          <div class="mt-6 p-5 rounded-xl bg-black border border-neutral-800 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+            <div>
+              <span class="text-[10px] font-mono uppercase text-neon-lime tracking-widest font-bold">// SYSTEM RECOMMENDATION</span>
+              <h4 id="rec-protocol-name" class="font-display font-black text-lg uppercase text-white mt-0.5">Heavy Barbell Strength + Hypertrophy</h4>
+              <p id="rec-protocol-desc" class="text-xs text-neutral-400 mt-1">Target 4-5 strength sessions weekly with high-intensity progressive overload.</p>
+            </div>
+            <button id="book-consult-btn" class="btn-magnetic btn-shine px-5 py-3 rounded-xl bg-neon-lime text-black font-display font-black text-xs uppercase tracking-wider shadow-neon-lime hover:scale-105 transition-transform flex-shrink-0">
+              Lock In Blueprint
+            </button>
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="bg-black border-t border-neutral-800 pt-16 pb-12 px-4 sm:px-8 text-neutral-400">
+    <div class="max-w-7xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-4 text-xs font-mono">
+      <span>© 2026 APEX ATHLETICS GROUP LLC. ALL RIGHTS RESERVED.</span>
+      <div class="flex items-center gap-6">
+        <a href="index.html" class="hover:text-white transition-colors">HOME</a>
+        <a href="programs.html" class="hover:text-white transition-colors">PROGRAMS</a>
+        <a href="pricing.html" class="hover:text-white transition-colors">PRICING</a>
+        <a href="admin-login.html" class="hover:text-neon-lime transition-colors">ADMIN</a>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ACTION MODAL -->
+  <div id="action-modal" class="fixed inset-0 z-50 hidden flex items-center justify-center p-3 sm:p-4 overflow-y-auto" aria-modal="true" role="dialog">
+    <div id="modal-backdrop" class="fixed inset-0 bg-black/80 backdrop-blur-md"></div>
+    <div id="modal-content-box" class="relative z-10 w-full max-w-lg max-h-[92vh] overflow-y-auto rounded-2xl bg-dark-surface border border-neutral-800 p-5 sm:p-8 shadow-2xl my-auto">
+      <button id="modal-close-btn" class="absolute top-5 right-5 w-8 h-8 rounded-full bg-neutral-800 text-neutral-400 hover:text-white flex items-center justify-center transition-colors"><i class="fa-solid fa-xmark"></i></button>
+      <div class="mb-6">
+        <span class="text-xs font-mono font-bold uppercase tracking-widest text-neon-lime">// PROTOCOL CONFIRMATION</span>
+        <h3 id="modal-title" class="font-display font-black text-2xl sm:text-3xl uppercase tracking-wide text-white mt-1">CLAIM 7-DAY VIP PASS</h3>
+        <p id="modal-subtitle" class="text-xs text-neutral-400 mt-1">Experience full unrestricted access to Apex Athletics.</p>
+      </div>
+      <form id="modal-booking-form" class="space-y-4">
+        <div>
+          <label class="block text-xs font-mono font-bold uppercase text-neutral-300 mb-1">Full Legal Name</label>
+          <input type="text" id="modal-input-name" required placeholder="e.g. Alex Mercer" class="w-full px-4 py-3 rounded-xl bg-neutral-900 border border-neutral-800 focus:border-neon-lime focus:outline-none text-white text-sm">
+        </div>
+        <div>
+          <label class="block text-xs font-mono font-bold uppercase text-neutral-300 mb-1">Email Address</label>
+          <input type="email" id="modal-input-email" required placeholder="alex@domain.com" class="w-full px-4 py-3 rounded-xl bg-neutral-900 border border-neutral-800 focus:border-neon-lime focus:outline-none text-white text-sm">
+        </div>
+        <div>
+          <label class="block text-xs font-mono font-bold uppercase text-neutral-300 mb-1">Phone Number</label>
+          <input type="tel" id="modal-input-phone" placeholder="+1 (555) 000-0000" class="w-full px-4 py-3 rounded-xl bg-neutral-900 border border-neutral-800 focus:border-neon-lime focus:outline-none text-white text-sm">
+        </div>
+        <button type="submit" class="btn-magnetic btn-shine w-full py-4 rounded-xl bg-neon-lime text-black font-display font-black text-sm uppercase tracking-wider shadow-neon-lime hover:scale-[1.02] transition-transform">Confirm & Sync to Database</button>
+      </form>
+      <div id="modal-confirmation-state" class="hidden text-center py-4">
+        <div class="w-16 h-16 rounded-full bg-neon-lime/20 border border-neon-lime text-neon-lime flex items-center justify-center text-3xl mx-auto mb-4 shadow-neon-lime"><i class="fa-solid fa-check"></i></div>
+        <h4 class="font-display font-black text-2xl uppercase text-white">ACCESS GRANTED</h4>
+        <p class="text-xs text-neutral-400 mt-1">Stored securely in cloud database.</p>
+        <div class="mt-6 p-5 rounded-xl bg-black border border-neon-lime/40 text-left font-mono">
+          <div class="flex items-center justify-between pb-3 border-b border-neutral-800"><span class="text-xs text-neon-lime font-bold">APEX // SMART PASS</span><span class="text-[10px] text-neutral-400">ACTIVE 2026</span></div>
+          <div class="py-3"><p class="text-[10px] text-neutral-500 uppercase">ATHLETE NAME</p><p id="confirm-pass-holder" class="font-bold text-white text-sm">ALEX MERCER</p></div>
+          <div class="flex items-center justify-between pt-2 border-t border-neutral-800"><div><p class="text-[10px] text-neutral-500">DIGITAL KEY ID</p><p id="confirm-pass-code" class="text-xs text-neon-lime font-bold">APX-928411</p></div><i class="fa-solid fa-qrcode text-white text-xl"></i></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="js/supabase-client.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script src="js/main.js"></script>
+  <script>
+    // Diagnostic Macro Lab Engine
+    (function() {
+      let isMetric = true;
+
+      const btnMetric = document.getElementById('unit-metric');
+      const btnImperial = document.getElementById('unit-imperial');
+      const weightLabel = document.getElementById('weight-label');
+      const heightLabel = document.getElementById('height-label');
+      const inputWeight = document.getElementById('input-weight');
+      const inputHeight = document.getElementById('input-height');
+      const inputAge = document.getElementById('input-age');
+      const inputActivity = document.getElementById('input-activity');
+      const inputGoal = document.getElementById('input-goal');
+
+      const outBmi = document.getElementById('output-bmi');
+      const outBmiStatus = document.getElementById('output-bmi-status');
+      const outBmr = document.getElementById('output-bmr');
+      const outTdee = document.getElementById('output-tdee');
+      const outTargetCals = document.getElementById('output-target-cals');
+      const outGoalSubtext = document.getElementById('output-goal-subtext');
+
+      const macroProteinG = document.getElementById('macro-protein-g');
+      const macroProteinCal = document.getElementById('macro-protein-cal');
+      const macroCarbsG = document.getElementById('macro-carbs-g');
+      const macroCarbsCal = document.getElementById('macro-carbs-cal');
+      const macroFatsG = document.getElementById('macro-fats-g');
+      const macroFatsCal = document.getElementById('macro-fats-cal');
+
+      const barProtein = document.getElementById('bar-protein');
+      const barCarbs = document.getElementById('bar-carbs');
+      const barFats = document.getElementById('bar-fats');
+
+      const recName = document.getElementById('rec-protocol-name');
+      const recDesc = document.getElementById('rec-protocol-desc');
+      const bookConsultBtn = document.getElementById('book-consult-btn');
+
+      function switchUnits(metric) {
+        if (isMetric === metric) return;
+        isMetric = metric;
+
+        if (isMetric) {
+          btnMetric.className = 'px-2.5 py-1 rounded bg-neon-lime text-black font-bold';
+          btnImperial.className = 'px-2.5 py-1 rounded text-neutral-400 hover:text-white font-bold';
+          weightLabel.textContent = 'Weight (KG)';
+          heightLabel.textContent = 'Height (CM)';
+          // convert lbs to kg, inches to cm
+          inputWeight.value = Math.round(parseFloat(inputWeight.value) / 2.20462);
+          inputHeight.value = Math.round(parseFloat(inputHeight.value) * 2.54);
+        } else {
+          btnImperial.className = 'px-2.5 py-1 rounded bg-neon-lime text-black font-bold';
+          btnMetric.className = 'px-2.5 py-1 rounded text-neutral-400 hover:text-white font-bold';
+          weightLabel.textContent = 'Weight (LBS)';
+          heightLabel.textContent = 'Height (INCHES)';
+          // convert kg to lbs, cm to inches
+          inputWeight.value = Math.round(parseFloat(inputWeight.value) * 2.20462);
+          inputHeight.value = Math.round(parseFloat(inputHeight.value) / 2.54);
+        }
+        calculateAll();
+      }
+
+      btnMetric.addEventListener('click', () => switchUnits(true));
+      btnImperial.addEventListener('click', () => switchUnits(false));
+
+      function calculateAll() {
+        const rawWeight = parseFloat(inputWeight.value) || 75;
+        const rawHeight = parseFloat(inputHeight.value) || 175;
+        const age = parseInt(inputAge.value) || 25;
+        const activity = parseFloat(inputActivity.value) || 1.55;
+        const goal = inputGoal.value;
+        const gender = document.querySelector('input[name="gender"]:checked').value;
+
+        // Normalize to kg and cm
+        const weightKg = isMetric ? rawWeight : (rawWeight / 2.20462);
+        const heightCm = isMetric ? rawHeight : (rawHeight * 2.54);
+
+        // 1. BMI Calculation
+        const heightMeters = heightCm / 100;
+        const bmi = (weightKg / (heightMeters * heightMeters)).toFixed(1);
+        outBmi.textContent = bmi;
+
+        if (bmi < 18.5) {
+          outBmiStatus.textContent = 'Underweight';
+          outBmiStatus.className = 'text-[10px] font-mono text-cyan-400 font-bold uppercase';
+        } else if (bmi < 25) {
+          outBmiStatus.textContent = 'Optimal Athletic';
+          outBmiStatus.className = 'text-[10px] font-mono text-neon-lime font-bold uppercase';
+        } else if (bmi < 30) {
+          outBmiStatus.textContent = 'Overweight / Hypertrophy';
+          outBmiStatus.className = 'text-[10px] font-mono text-yellow-400 font-bold uppercase';
+        } else {
+          outBmiStatus.textContent = 'High Body Mass';
+          outBmiStatus.className = 'text-[10px] font-mono text-neon-crimson font-bold uppercase';
+        }
+
+        // 2. BMR (Mifflin-St Jeor formula)
+        let bmr = (10 * weightKg) + (6.25 * heightCm) - (5 * age);
+        bmr = (gender === 'male') ? bmr + 5 : bmr - 161;
+        bmr = Math.round(bmr);
+        outBmr.textContent = bmr.toLocaleString();
+
+        // 3. TDEE
+        const tdee = Math.round(bmr * activity);
+        outTdee.textContent = tdee.toLocaleString();
+
+        // 4. Goal Adjustment
+        let targetCalories = tdee;
+        let pRatio = 0.30;
+        let cRatio = 0.45;
+        let fRatio = 0.25;
+
+        if (goal === 'hypertrophy') {
+          targetCalories = tdee + 350;
+          outGoalSubtext.textContent = 'kcal/day (+350 surplus)';
+          pRatio = 0.28;
+          cRatio = 0.48;
+          fRatio = 0.24;
+          recName.textContent = 'Heavy Barbell Strength & Hypertrophy Lab';
+          recDesc.textContent = 'Focus on 8-12 rep hypertrophy protocols with progressive mechanical tension.';
+        } else if (goal === 'shred') {
+          targetCalories = Math.max(1200, tdee - 500);
+          outGoalSubtext.textContent = 'kcal/day (-500 deficit)';
+          pRatio = 0.35;
+          cRatio = 0.35;
+          fRatio = 0.30;
+          recName.textContent = 'Hypersonic HIIT & Combat Strike MMA';
+          recDesc.textContent = 'High EPOC metabolic conditioning sessions to maximize lipid oxidation.';
+        } else if (goal === 'recomp') {
+          targetCalories = tdee;
+          outGoalSubtext.textContent = 'kcal/day (Maintenance)';
+          pRatio = 0.32;
+          cRatio = 0.43;
+          fRatio = 0.25;
+          recName.textContent = 'Hybrid Conjugate Periodization';
+          recDesc.textContent = 'Combine 3 strength days with 2 high-intensity metabolic conditioning circuits.';
+        } else if (goal === 'strength') {
+          targetCalories = tdee + 450;
+          outGoalSubtext.textContent = 'kcal/day (+450 surplus)';
+          pRatio = 0.25;
+          cRatio = 0.50;
+          fRatio = 0.25;
+          recName.textContent = 'Max Power & Kinetic Cleans';
+          recDesc.textContent = 'Submaximal velocity lifting and 1-3 rep heavy Olympic barbell pulling.';
+        }
+
+        outTargetCals.textContent = targetCalories.toLocaleString();
+
+        // 5. Grams
+        const proteinCal = Math.round(targetCalories * pRatio);
+        const carbsCal = Math.round(targetCalories * cRatio);
+        const fatsCal = Math.round(targetCalories * fRatio);
+
+        const proteinG = Math.round(proteinCal / 4);
+        const carbsG = Math.round(carbsCal / 4);
+        const fatsG = Math.round(fatsCal / 9);
+
+        macroProteinG.textContent = proteinG;
+        macroProteinCal.textContent = proteinCal.toLocaleString();
+        macroCarbsG.textContent = carbsG;
+        macroCarbsCal.textContent = carbsCal.toLocaleString();
+        macroFatsG.textContent = fatsG;
+        macroFatsCal.textContent = fatsCal.toLocaleString();
+
+        // 6. Bar Widths
+        barProtein.style.width = Math.round(pRatio * 100) + '%';
+        barCarbs.style.width = Math.round(cRatio * 100) + '%';
+        barFats.style.width = Math.round(fRatio * 100) + '%';
+      }
+
+      // Listeners
+      ['input-weight', 'input-height', 'input-age'].forEach(id => {
+        document.getElementById(id).addEventListener('input', calculateAll);
+      });
+      ['input-activity', 'input-goal'].forEach(id => {
+        document.getElementById(id).addEventListener('change', calculateAll);
+      });
+      document.querySelectorAll('input[name="gender"]').forEach(el => {
+        el.addEventListener('change', calculateAll);
+      });
+
+      document.getElementById('recalc-btn').addEventListener('click', calculateAll);
+
+      // Book consult with blueprint
+      bookConsultBtn.addEventListener('click', () => {
+        const goalText = inputGoal.options[inputGoal.selectedIndex].text;
+        const cal = outTargetCals.textContent;
+        if (window.openBookingModal) {
+          window.openBookingModal({
+            title: 'LOCK IN BIOMETRIC BLUEPRINT',
+            subtitle: 'Target: ' + cal + ' kcal | ' + goalText + '. Free coach breakdown included.',
+            plan: 'Biometric Blueprint (' + cal + ' kcal)',
+            category: 'Diagnostic Lab'
+          });
+        }
+      });
+
+      // Initial run
+      calculateAll();
+    })();
+  </script>
+</body>
+</html>

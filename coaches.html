@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MASTER COACHES // APEX ATHLETICS</title>
+  <meta name="description" content="Meet the elite coaching council at Apex Athletics. Olympic record holders, sports doctors, and professional champions.">
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><polygon points='50,5 95,90 5,90' fill='%23ccff00'/><polygon points='50,30 80,85 20,85' fill='%230b0b0b'/></svg>">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Anton&family=Bebas+Neue&family=Inter:wght@300;400;500;600;700;800;900&family=Syne:wght@700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            'dark-bg': '#0b0b0b',
+            'dark-surface': '#141414',
+            'dark-card': '#191919',
+            'neon-lime': '#ccff00',
+            'neon-crimson': '#ff3344',
+            'neon-cyan': '#00f0ff',
+          },
+          fontFamily: {
+            sans: ['Inter', 'sans-serif'],
+            display: ['Syne', 'Anton', 'sans-serif'],
+            bebas: ['"Bebas Neue"', 'sans-serif'],
+          }
+        }
+      }
+    };
+  </script>
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body class="bg-dark-bg text-neutral-100 selection:bg-neon-lime selection:text-black antialiased">
+
+  <div id="cursor-dot" class="custom-cursor-dot" aria-hidden="true"></div>
+  <div id="cursor-outline" class="custom-cursor-outline" aria-hidden="true"></div>
+
+  <!-- STICKY GLASS NAVBAR -->
+  <header id="main-navbar" class="fixed top-0 left-0 w-full z-50 transition-all duration-300 py-3.5 sm:py-4 px-4 sm:px-6 lg:px-8 bg-black/80 backdrop-blur-md border-b border-white/5">
+    <div class="max-w-7xl mx-auto flex items-center justify-between gap-4">
+      
+      <a href="index.html" class="flex items-center gap-2.5 sm:gap-3 group focus:outline-none flex-shrink-0" aria-label="Apex Athletics Home">
+        <div class="w-9 h-9 sm:w-10 sm:h-10 rounded-xl bg-neon-lime flex items-center justify-center font-display font-black text-black text-lg sm:text-xl shadow-[0_0_15px_rgba(204,255,0,0.5)] group-hover:scale-105 group-hover:rotate-3 transition-transform">
+          <i class="fa-solid fa-bolt"></i>
+        </div>
+        <div class="flex flex-col">
+          <span class="font-display font-extrabold text-lg sm:text-xl tracking-tight text-white group-hover:text-neon-lime transition-colors">
+            APEX<span class="text-neon-lime font-black"> // </span>ATHLETICS
+          </span>
+          <span class="text-[9px] sm:text-[10px] tracking-[0.25em] uppercase text-neutral-400 font-semibold">Performance Lab</span>
+        </div>
+      </a>
+
+      <nav class="hidden xl:flex items-center gap-6 2xl:gap-8 text-xs 2xl:text-sm font-semibold tracking-wider uppercase text-neutral-300">
+        <a href="index.html" class="nav-link hover:text-white transition-colors">Home</a>
+        <a href="programs.html" class="nav-link hover:text-white transition-colors">Programs</a>
+        <a href="schedule.html" class="nav-link hover:text-white transition-colors">Schedule</a>
+        <a href="facilities.html" class="nav-link hover:text-white transition-colors">Arsenal</a>
+        <a href="coaches.html" class="nav-link text-neon-lime transition-colors">Coaches</a>
+        <a href="pricing.html" class="nav-link hover:text-white transition-colors">Pricing</a>
+        <a href="calculator.html" class="nav-link hover:text-white transition-colors">Lab Calc</a>
+        <a href="admin-login.html" class="nav-link text-neutral-400 hover:text-neon-lime transition-colors flex items-center gap-1.5" title="Admin Control Portal">
+          <i class="fa-solid fa-shield-halved text-xs text-neon-lime"></i> Admin
+        </a>
+      </nav>
+
+      <div class="flex items-center gap-2.5 sm:gap-3.5 flex-shrink-0">
+        <button id="audio-toggle-btn" class="hidden sm:flex items-center gap-2 px-3 py-1.5 rounded-full border border-neutral-800 bg-neutral-900/60 text-xs font-mono font-medium hover:border-neutral-600 transition-colors" title="Toggle Sound">
+          <i id="audio-icon" class="fa-solid fa-volume-xmark text-neutral-400"></i>
+          <span id="audio-status-text" class="text-neutral-400">SFX: OFF</span>
+        </button>
+
+        <button class="trigger-join-modal btn-magnetic btn-shine px-4 sm:px-6 py-2 sm:py-2.5 rounded-full bg-neon-lime text-black font-display font-black text-xs sm:text-sm tracking-wider uppercase shadow-neon-lime hover:scale-105 active:scale-95 transition-all">
+          <span>Join Now</span>
+        </button>
+
+        <button id="mobile-menu-toggle" class="xl:hidden w-10 h-10 flex flex-col items-center justify-center gap-1.5 rounded-xl bg-neutral-900 border border-neutral-800" aria-label="Toggle Navigation Menu">
+          <span id="ham-line-1" class="w-5 sm:w-6 h-0.5 bg-neutral-200 transition-all"></span>
+          <span id="ham-line-2" class="w-5 sm:w-6 h-0.5 bg-neutral-200 transition-all"></span>
+          <span id="ham-line-3" class="w-3.5 sm:w-4 h-0.5 bg-neon-lime self-start ml-2 sm:ml-2.5 transition-all"></span>
+        </button>
+      </div>
+
+    </div>
+  </header>
+
+  <!-- MOBILE MENU OVERLAY -->
+  <div id="mobile-menu-overlay" class="fixed inset-0 z-40 bg-black/95 backdrop-blur-2xl hidden flex-col justify-between px-6 py-24 overflow-y-auto" aria-modal="true" role="dialog">
+    <div class="flex flex-col gap-6">
+      <span class="text-xs font-mono tracking-widest uppercase text-neon-lime">// NAVIGATION PROTOCOL</span>
+      <nav class="flex flex-col gap-3 font-display font-black text-2xl sm:text-3xl uppercase tracking-wider">
+        <a href="index.html" class="mobile-nav-link text-neutral-300 hover:text-neon-lime">00. Home</a>
+        <a href="programs.html" class="mobile-nav-link text-neutral-300 hover:text-neon-lime">01. Programs</a>
+        <a href="schedule.html" class="mobile-nav-link text-neutral-300 hover:text-neon-lime">02. Schedule</a>
+        <a href="facilities.html" class="mobile-nav-link text-neutral-300 hover:text-neon-lime">03. Arsenal & Amenities</a>
+        <a href="coaches.html" class="mobile-nav-link text-neon-lime">04. Elite Coaches</a>
+        <a href="pricing.html" class="mobile-nav-link text-neutral-300 hover:text-neon-lime">05. Membership Tiers</a>
+        <a href="calculator.html" class="mobile-nav-link text-neutral-300 hover:text-neon-lime">06. Athletic Calculator</a>
+        <a href="admin-login.html" class="mobile-nav-link text-neutral-400 hover:text-neon-lime flex items-center gap-2 text-xl pt-2 border-t border-neutral-800">
+          <i class="fa-solid fa-shield-halved text-neon-lime text-base"></i> 07. Admin Portal
+        </a>
+      </nav>
+    </div>
+
+    <div class="flex flex-col gap-4 pt-6 border-t border-neutral-800">
+      <button class="trigger-join-modal mobile-menu-item w-full py-4 rounded-xl bg-neon-lime text-black font-display font-black text-center text-base sm:text-lg uppercase tracking-wider shadow-neon-lime">
+        Claim 7-Day VIP Pass
+      </button>
+    </div>
+  </div>
+
+  <main class="pt-32 pb-24 px-4 sm:px-8 max-w-7xl mx-auto">
+    
+    <!-- PAGE HERO HEADER -->
+    <div class="mb-16">
+      <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-neon-lime/10 border border-neon-lime/30 text-neon-lime font-mono text-xs font-bold uppercase tracking-widest mb-4">
+        <i class="fa-solid fa-user-ninja"></i> THE COACHING COUNCIL
+      </div>
+      <h1 class="font-display font-black text-4xl sm:text-6xl lg:text-7xl uppercase tracking-tight text-white">
+        MASTER <span class="text-transparent bg-clip-text bg-gradient-to-r from-neon-lime via-white to-neon-lime neon-text-lime">COACHES</span>
+      </h1>
+      <p class="max-w-2xl text-neutral-400 text-sm sm:text-base mt-4 leading-relaxed">
+        Our coaches do not count reps from clipboards. They are elite practitioners: national champions, sports orthopedic clinicians, and professional fight camp directors.
+      </p>
+    </div>
+
+    <!-- COACHES CARDS GRID -->
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-20">
+      
+      <!-- Coach 1 -->
+      <div class="rounded-3xl overflow-hidden glass-panel border border-neutral-800 hover:border-neon-lime/40 transition-all flex flex-col group">
+        <div class="relative h-96 overflow-hidden">
+          <img src="https://images.unsplash.com/photo-1567013127542-490d757e51fc?q=80&w=800&auto=format&fit=crop" alt="Coach Marcus Vance" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 filter brightness-90 contrast-110">
+          <div class="absolute inset-0 bg-gradient-to-t from-dark-card via-black/40 to-transparent"></div>
+          <span class="absolute top-4 left-4 px-3 py-1 rounded-full text-xs font-mono font-bold uppercase bg-black/80 border border-neon-lime/40 text-neon-lime backdrop-blur-md">Head of Strength</span>
+        </div>
+        <div class="p-6 bg-dark-card flex-1 flex flex-col justify-between">
+          <div>
+            <h3 class="font-display font-black text-2xl uppercase tracking-wide text-white">Marcus "Titan" Vance</h3>
+            <p class="text-xs text-neutral-400 font-mono mt-1">CSCS • 4x National Record Holder</p>
+            <p class="text-xs text-neutral-300 mt-3 leading-relaxed">Specialized in periodized barbell kinematics, central nervous system potentiation, and Olympic pulling mechanics.</p>
+          </div>
+          <div class="mt-6 pt-4 border-t border-neutral-800 flex items-center justify-between">
+            <span class="text-xs font-mono text-neon-lime">14 YRS EXP</span>
+            <button class="book-coach-btn px-3 py-1.5 rounded-lg bg-neutral-800 hover:bg-neon-lime hover:text-black text-xs font-bold uppercase transition-colors" data-coach="Marcus Vance">Book 1-on-1</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Coach 2 -->
+      <div class="rounded-3xl overflow-hidden glass-panel border border-neutral-800 hover:border-amber-400/40 transition-all flex flex-col group">
+        <div class="relative h-96 overflow-hidden">
+          <img src="https://images.unsplash.com/photo-1594381898411-846e7d193883?q=80&w=800&auto=format&fit=crop" alt="Coach Elena Rostova" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 filter brightness-90 contrast-110">
+          <div class="absolute inset-0 bg-gradient-to-t from-dark-card via-black/40 to-transparent"></div>
+          <span class="absolute top-4 left-4 px-3 py-1 rounded-full text-xs font-mono font-bold uppercase bg-black/80 border border-amber-400/40 text-amber-400 backdrop-blur-md">Conditioning Lead</span>
+        </div>
+        <div class="p-6 bg-dark-card flex-1 flex flex-col justify-between">
+          <div>
+            <h3 class="font-display font-black text-2xl uppercase tracking-wide text-white">Elena Rostova</h3>
+            <p class="text-xs text-neutral-400 font-mono mt-1">Ex-Olympic Sprinter • VO2 Specialist</p>
+            <p class="text-xs text-neutral-300 mt-3 leading-relaxed">High-altitude hypoxic training specialist directing athletic lactate clearance, track sprints, and high-output cardiovascular power.</p>
+          </div>
+          <div class="mt-6 pt-4 border-t border-neutral-800 flex items-center justify-between">
+            <span class="text-xs font-mono text-amber-400">11 YRS EXP</span>
+            <button class="book-coach-btn px-3 py-1.5 rounded-lg bg-neutral-800 hover:bg-amber-400 hover:text-black text-xs font-bold uppercase transition-colors" data-coach="Elena Rostova">Book 1-on-1</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Coach 3 -->
+      <div class="rounded-3xl overflow-hidden glass-panel border border-neutral-800 hover:border-red-500/40 transition-all flex flex-col group">
+        <div class="relative h-96 overflow-hidden">
+          <img src="https://images.unsplash.com/photo-1534367507873-d2d7e24c797f?q=80&w=800&auto=format&fit=crop" alt="Coach David Brooks" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 filter brightness-90 contrast-110">
+          <div class="absolute inset-0 bg-gradient-to-t from-dark-card via-black/40 to-transparent"></div>
+          <span class="absolute top-4 left-4 px-3 py-1 rounded-full text-xs font-mono font-bold uppercase bg-black/80 border border-red-500/40 text-neon-crimson backdrop-blur-md">Combat Director</span>
+        </div>
+        <div class="p-6 bg-dark-card flex-1 flex flex-col justify-between">
+          <div>
+            <h3 class="font-display font-black text-2xl uppercase tracking-wide text-white">David "Havoc" Brooks</h3>
+            <p class="text-xs text-neutral-400 font-mono mt-1">Golden Gloves Champion • Pro MMA</p>
+            <p class="text-xs text-neutral-300 mt-3 leading-relaxed">Precision striking angles, reactive head movement, torque transfer, and combative conditioning forged through 18 professional bouts.</p>
+          </div>
+          <div class="mt-6 pt-4 border-t border-neutral-800 flex items-center justify-between">
+            <span class="text-xs font-mono text-neon-crimson">13 YRS EXP</span>
+            <button class="book-coach-btn px-3 py-1.5 rounded-lg bg-neutral-800 hover:bg-neon-crimson hover:text-white text-xs font-bold uppercase transition-colors" data-coach="David Brooks">Book 1-on-1</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Coach 4 -->
+      <div class="rounded-3xl overflow-hidden glass-panel border border-neutral-800 hover:border-cyan-400/40 transition-all flex flex-col group">
+        <div class="relative h-96 overflow-hidden">
+          <img src="https://images.unsplash.com/photo-1517838277536-f5f99be501cd?q=80&w=800&auto=format&fit=crop" alt="Coach Maya Lin" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 filter brightness-90 contrast-110">
+          <div class="absolute inset-0 bg-gradient-to-t from-dark-card via-black/40 to-transparent"></div>
+          <span class="absolute top-4 left-4 px-3 py-1 rounded-full text-xs font-mono font-bold uppercase bg-black/80 border border-cyan-400/40 text-neon-cyan backdrop-blur-md">Sports DPT & Recovery</span>
+        </div>
+        <div class="p-6 bg-dark-card flex-1 flex flex-col justify-between">
+          <div>
+            <h3 class="font-display font-black text-2xl uppercase tracking-wide text-white">Dr. Maya Lin</h3>
+            <p class="text-xs text-neutral-400 font-mono mt-1">Doctor of Physical Therapy • Fascial Lead</p>
+            <p class="text-xs text-neutral-300 mt-3 leading-relaxed">Pioneer in contrast cryotherapy, myofascial release, joint capsule integrity, and parasympathetic recovery acceleration.</p>
+          </div>
+          <div class="mt-6 pt-4 border-t border-neutral-800 flex items-center justify-between">
+            <span class="text-xs font-mono text-neon-cyan">9 YRS EXP</span>
+            <button class="book-coach-btn px-3 py-1.5 rounded-lg bg-neutral-800 hover:bg-neon-cyan hover:text-black text-xs font-bold uppercase transition-colors" data-coach="Dr. Maya Lin">Book 1-on-1</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Coach 5 -->
+      <div class="rounded-3xl overflow-hidden glass-panel border border-neutral-800 hover:border-neon-lime/40 transition-all flex flex-col group">
+        <div class="relative h-96 overflow-hidden">
+          <img src="https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?q=80&w=800&auto=format&fit=crop" alt="Coach Jaxson Reed" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 filter brightness-90 contrast-110">
+          <div class="absolute inset-0 bg-gradient-to-t from-dark-card via-black/40 to-transparent"></div>
+          <span class="absolute top-4 left-4 px-3 py-1 rounded-full text-xs font-mono font-bold uppercase bg-black/80 border border-neon-lime/40 text-neon-lime backdrop-blur-md">Hypertrophy Master</span>
+        </div>
+        <div class="p-6 bg-dark-card flex-1 flex flex-col justify-between">
+          <div>
+            <h3 class="font-display font-black text-2xl uppercase tracking-wide text-white">Jaxson Reed</h3>
+            <p class="text-xs text-neutral-400 font-mono mt-1">Pro Physique Coach • Biomechanics</p>
+            <p class="text-xs text-neutral-300 mt-3 leading-relaxed">Pioneering lengthened-partial muscular hypertrophy frameworks and personalized structural anatomical alignment.</p>
+          </div>
+          <div class="mt-6 pt-4 border-t border-neutral-800 flex items-center justify-between">
+            <span class="text-xs font-mono text-neon-lime">10 YRS EXP</span>
+            <button class="book-coach-btn px-3 py-1.5 rounded-lg bg-neutral-800 hover:bg-neon-lime hover:text-black text-xs font-bold uppercase transition-colors" data-coach="Jaxson Reed">Book 1-on-1</button>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="bg-black border-t border-neutral-800 pt-16 pb-12 px-4 sm:px-8 text-neutral-400">
+    <div class="max-w-7xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-4 text-xs font-mono">
+      <span>© 2026 APEX ATHLETICS GROUP LLC. ALL RIGHTS RESERVED.</span>
+      <div class="flex items-center gap-6">
+        <a href="index.html" class="hover:text-white transition-colors">HOME</a>
+        <a href="schedule.html" class="hover:text-white transition-colors">SCHEDULE</a>
+        <a href="admin-login.html" class="hover:text-neon-lime transition-colors">ADMIN</a>
+      </div>
+    </div>
+  </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="js/supabase-client.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script src="js/main.js"></script>
+</body>
+</html>

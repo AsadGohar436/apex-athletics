@@ -1,0 +1,372 @@
+/* Custom CSS variables for APEX Gym theme */
+:root {
+  --color-bg: #0b0b0b;
+  --color-surface: #141414;
+  --color-surface-hover: #1e1e1e;
+  --color-neon-lime: #ccff00;
+  --color-neon-crimson: #ff3344;
+  --color-neon-cyan: #00f0ff;
+  --color-muted: #8e8e93;
+}
+
+/* Base resets & typography */
+html {
+  scroll-behavior: smooth;
+  background-color: var(--color-bg);
+  color: #f3f4f6;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  overflow-x: hidden;
+}
+
+body {
+  background-color: var(--color-bg);
+  overflow-x: hidden;
+  position: relative;
+}
+
+/* Aggressive display typography */
+.font-display {
+  font-family: 'Syne', 'Anton', 'Bebas Neue', sans-serif;
+  letter-spacing: -0.02em;
+}
+
+.font-bebas {
+  font-family: 'Bebas Neue', sans-serif;
+  letter-spacing: 0.04em;
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+::-webkit-scrollbar-track {
+  background: #0b0b0b;
+}
+::-webkit-scrollbar-thumb {
+  background: #262626;
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--color-neon-lime);
+}
+
+/* Custom Cursor Styles */
+.custom-cursor-dot {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 8px;
+  height: 8px;
+  background-color: var(--color-neon-lime);
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 9999;
+  transform: translate(-50%, -50%);
+  transition: opacity 0.25s ease;
+  box-shadow: 0 0 10px var(--color-neon-lime);
+  opacity: 0; /* Hidden initially to prevent sticking to top-left on page load */
+}
+
+.custom-cursor-outline {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 36px;
+  height: 36px;
+  border: 1.5px solid rgba(204, 255, 0, 0.6);
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 9998;
+  transform: translate(-50%, -50%);
+  transition: width 0.2s cubic-bezier(0.2, 0.8, 0.2, 1),
+              height 0.2s cubic-bezier(0.2, 0.8, 0.2, 1),
+              border-color 0.2s ease,
+              background-color 0.2s ease,
+              opacity 0.25s ease;
+  opacity: 0; /* Hidden initially to prevent sticking to top-left on page load */
+}
+
+/* Hover state for cursor */
+.cursor-hover .custom-cursor-outline {
+  width: 58px;
+  height: 58px;
+  border-color: var(--color-neon-lime);
+  background-color: rgba(204, 255, 0, 0.1);
+}
+
+/* Disable custom cursor on touch screens, tablets, or coarse devices */
+@media (hover: none), (pointer: coarse) {
+  .custom-cursor-dot,
+  .custom-cursor-outline {
+    display: none !important;
+  }
+}
+
+/* Glassmorphism Classes */
+.glass-panel {
+  background: rgba(20, 20, 20, 0.7);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.glass-panel-glow {
+  background: rgba(20, 20, 20, 0.85);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(204, 255, 0, 0.25);
+  box-shadow: 0 0 25px rgba(204, 255, 0, 0.08);
+}
+
+/* Neon Glow Utilities */
+.neon-glow-lime {
+  box-shadow: 0 0 20px rgba(204, 255, 0, 0.45);
+}
+
+.neon-glow-crimson {
+  box-shadow: 0 0 20px rgba(255, 51, 68, 0.45);
+}
+
+.neon-text-lime {
+  text-shadow: 0 0 14px rgba(204, 255, 0, 0.6);
+}
+
+.neon-text-crimson {
+  text-shadow: 0 0 14px rgba(255, 51, 68, 0.6);
+}
+
+/* Animated Neon Gradient Border */
+.neon-border-animated {
+  position: relative;
+  border-radius: 1rem;
+  background: #141414;
+}
+
+.neon-border-animated::before {
+  content: '';
+  position: absolute;
+  inset: -2px;
+  border-radius: 1.1rem;
+  padding: 2px;
+  background: linear-gradient(
+    90deg,
+    #ccff00,
+    #ff3344,
+    #00f0ff,
+    #ccff00
+  );
+  background-size: 300% 300%;
+  animation: borderGlow 6s linear infinite;
+  -webkit-mask: 
+    linear-gradient(#fff 0 0) content-box, 
+    linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  pointer-events: none;
+}
+
+@keyframes borderGlow {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+/* Subtle Continuous Ken-Burns Zoom */
+.ken-burns {
+  animation: kenBurnsZoom 20s ease-in-out infinite alternate;
+}
+
+@keyframes kenBurnsZoom {
+  0% {
+    transform: scale(1) translate(0, 0);
+  }
+  100% {
+    transform: scale(1.12) translate(-1%, -1%);
+  }
+}
+
+/* Underline slide effect on navigation links */
+.nav-link {
+  position: relative;
+}
+
+.nav-link::after {
+  content: '';
+  position: absolute;
+  width: 0;
+  height: 2px;
+  bottom: -4px;
+  left: 0;
+  background-color: var(--color-neon-lime);
+  transition: width 0.3s cubic-bezier(0.2, 0.8, 0.2, 1);
+  box-shadow: 0 0 8px var(--color-neon-lime);
+}
+
+.nav-link:hover::after,
+.nav-link.active::after {
+  width: 100%;
+}
+
+/* 3D Tilt Card Base */
+.tilt-card {
+  transform-style: preserve-3d;
+  will-change: transform;
+  transition: transform 0.15s ease-out, box-shadow 0.3s ease;
+}
+
+.tilt-inner {
+  transform: translateZ(30px);
+}
+
+/* Noise texture overlay for high-end cinematic feel */
+.bg-noise {
+  background-image: radial-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 0);
+  background-size: 24px 24px;
+}
+
+/* Kinetic pulse dot */
+.pulse-dot {
+  position: relative;
+}
+.pulse-dot::before {
+  content: '';
+  position: absolute;
+  inset: -3px;
+  border-radius: 50%;
+  background: currentColor;
+  animation: ping 1.8s cubic-bezier(0, 0, 0.2, 1) infinite;
+  opacity: 0.75;
+}
+
+@keyframes ping {
+  75%, 100% {
+    transform: scale(2.2);
+    opacity: 0;
+  }
+}
+
+/* Magnetic Button helper classes */
+.btn-magnetic {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  overflow: hidden;
+  transition: transform 0.2s cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+/* Shine sweep effect on hover */
+.btn-shine {
+  position: relative;
+  overflow: hidden;
+}
+
+.btn-shine::after {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -60%;
+  width: 40%;
+  height: 200%;
+  background: linear-gradient(
+    to right,
+    rgba(255, 255, 255, 0) 0%,
+    rgba(255, 255, 255, 0.3) 50%,
+    rgba(255, 255, 255, 0) 100%
+  );
+  transform: rotate(30deg);
+  transition: none;
+  pointer-events: none;
+}
+
+.btn-shine:hover::after {
+  left: 120%;
+  transition: left 0.8s ease-in-out;
+}
+
+/* Scroll indicator bounce */
+@keyframes scrollBounce {
+  0%, 20%, 50%, 80%, 100% {
+    transform: translateY(0);
+  }
+  40% {
+    transform: translateY(10px);
+  }
+  60% {
+    transform: translateY(5px);
+  }
+}
+
+.animate-scroll-bounce {
+  animation: scrollBounce 2.2s infinite;
+}
+
+/* Reduced motion accessibility */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+  .ken-burns {
+    animation: none !important;
+  }
+}
+
+/* Condensed Athletic Metric Numbers (Prevents Any Overlapping) */
+.metric-number {
+  font-family: 'Bebas Neue', 'Anton', -apple-system, sans-serif;
+  letter-spacing: 0.02em;
+  line-height: 1;
+  white-space: nowrap;
+}
+
+/* Admin Dashboard Specific Styles */
+.admin-card {
+  background: rgba(20, 20, 20, 0.85);
+  backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 1rem;
+}
+
+.admin-table th {
+  padding: 0.85rem 1.25rem;
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: #a3a3a3;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.admin-table td {
+  padding: 1rem 1.25rem;
+  font-size: 0.875rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.admin-table tr:hover {
+  background-color: rgba(255, 255, 255, 0.02);
+}
+
+.badge-active {
+  background-color: rgba(204, 255, 0, 0.12);
+  color: #ccff00;
+  border: 1px solid rgba(204, 255, 0, 0.3);
+}
+
+.badge-pending {
+  background-color: rgba(251, 191, 36, 0.12);
+  color: #fbbf24;
+  border: 1px solid rgba(251, 191, 36, 0.3);
+}
+
+.badge-cancelled {
+  background-color: rgba(255, 51, 68, 0.12);
+  color: #ff3344;
+  border: 1px solid rgba(255, 51, 68, 0.3);
+}
+

@@ -1,0 +1,19 @@
+{
+  "name": "apex-athletics-gym",
+  "version": "1.0.0",
+  "description": "Modern, high-energy, fully animated athletic performance gym website powered by GSAP, ScrollTrigger, Lenis, and Tailwind CSS.",
+  "scripts": {
+    "start": "npx serve . -l 3000"
+  },
+  "keywords": [
+    "gym",
+    "fitness",
+    "gsap",
+    "scrolltrigger",
+    "lenis",
+    "tailwind",
+    "animation"
+  ],
+  "author": "Apex Athletics",
+  "license": "MIT"
+}

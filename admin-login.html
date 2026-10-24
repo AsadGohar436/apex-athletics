@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ADMIN ACCESS // APEX ATHLETICS</title>
+  <meta name="robots" content="noindex, nofollow">
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><polygon points='50,5 95,90 5,90' fill='%23ccff00'/><polygon points='50,30 80,85 20,85' fill='%230b0b0b'/></svg>">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Anton&family=Bebas+Neue&family=Inter:wght@300;400;500;600;700;800;900&family=Syne:wght@700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            'dark-bg': '#0b0b0b',
+            'dark-surface': '#141414',
+            'dark-card': '#191919',
+            'neon-lime': '#ccff00',
+            'neon-crimson': '#ff3344',
+            'neon-cyan': '#00f0ff',
+          },
+          fontFamily: {
+            sans: ['Inter', 'sans-serif'],
+            display: ['Syne', 'Anton', 'sans-serif'],
+            bebas: ['"Bebas Neue"', 'sans-serif'],
+          }
+        }
+      }
+    };
+  </script>
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body class="bg-dark-bg text-neutral-100 min-h-screen flex flex-col justify-between selection:bg-neon-lime selection:text-black">
+
+  <!-- Top Bar with Return Link -->
+  <header class="py-6 px-6 sm:px-12 flex items-center justify-between border-b border-neutral-800/80 bg-black/60 backdrop-blur-md">
+    <a href="index.html" class="flex items-center gap-3 group">
+      <div class="w-9 h-9 rounded-xl bg-neon-lime flex items-center justify-center font-display font-black text-black text-lg shadow-neon-lime">
+        <i class="fa-solid fa-bolt"></i>
+      </div>
+      <span class="font-display font-extrabold text-lg tracking-tight text-white group-hover:text-neon-lime transition-colors">
+        APEX<span class="text-neon-lime"> // </span>ATHLETICS
+      </span>
+    </a>
+
+    <a href="index.html" class="flex items-center gap-2 text-xs font-mono uppercase text-neutral-400 hover:text-white transition-colors">
+      <i class="fa-solid fa-arrow-left"></i> Return to Site
+    </a>
+  </header>
+
+  <!-- Login Container -->
+  <main class="my-auto py-12 px-4 sm:px-6 flex items-center justify-center">
+    <div class="w-full max-w-md">
+      
+      <!-- Card Box -->
+      <div class="glass-panel-glow rounded-3xl p-8 sm:p-10 border border-neutral-800 bg-neutral-900/90 shadow-2xl relative overflow-hidden">
+        
+        <!-- Glowing Accent Line -->
+        <div class="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-neon-lime via-white to-neon-lime"></div>
+
+        <!-- Header -->
+        <div class="text-center mb-8">
+          <div class="w-14 h-14 rounded-2xl bg-neutral-800 border border-neutral-700 text-neon-lime flex items-center justify-center text-2xl mx-auto mb-4 shadow-[0_0_20px_rgba(204,255,0,0.2)]">
+            <i class="fa-solid fa-shield-halved"></i>
+          </div>
+          <span class="text-[10px] font-mono font-bold uppercase tracking-widest text-neon-lime">// RESTRICTED CONTROL</span>
+          <h1 class="font-display font-black text-3xl uppercase tracking-wide text-white mt-1">
+            ADMIN GATEWAY
+          </h1>
+          <p class="text-xs text-neutral-400 mt-1.5">
+            Authenticate to access member management & facility mainframe.
+          </p>
+        </div>
+
+        <!-- Lockout Alert Box -->
+        <div id="login-lockout-msg" class="hidden mb-6 p-4 rounded-xl bg-red-500/10 border border-red-500/40 text-neon-crimson text-xs flex items-center justify-between gap-3">
+          <div class="flex items-center gap-3">
+            <i class="fa-solid fa-triangle-exclamation text-lg flex-shrink-0"></i>
+            <div>
+              <p class="font-bold uppercase tracking-wider">Access Locked Out</p>
+              <p class="text-[11px] text-neutral-300 mt-0.5">Too many failed attempts. Try again in <span id="lockout-timer" class="font-mono font-bold text-white"></span>.</p>
+            </div>
+          </div>
+          <button type="button" id="force-unlock-btn" class="px-3 py-1.5 rounded-lg bg-red-500/20 hover:bg-red-500/40 border border-red-500/40 text-[11px] font-mono font-bold text-white uppercase transition-colors flex-shrink-0">
+            Reset Lock
+          </button>
+        </div>
+
+        <!-- Error Message Alert -->
+        <div id="login-error-msg" class="hidden mb-6 p-3.5 rounded-xl bg-red-500/10 border border-red-500/40 text-neon-crimson text-xs font-medium"></div>
+
+        <!-- Login Form -->
+        <form id="admin-login-form" class="space-y-5">
+          <div>
+            <label for="admin-username" class="block text-xs font-mono font-bold uppercase text-neutral-300 mb-1.5">Admin Handle</label>
+            <div class="relative">
+              <span class="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-neutral-500">
+                <i class="fa-solid fa-user-shield text-sm"></i>
+              </span>
+              <input 
+                type="text" 
+                id="admin-username" 
+                required 
+                autocomplete="username"
+                placeholder="admin"
+                value="admin"
+                class="w-full pl-10 pr-4 py-3 rounded-xl bg-neutral-950 border border-neutral-800 focus:border-neon-lime focus:outline-none text-white text-sm font-mono transition-colors"
+              >
+            </div>
+          </div>
+
+          <div>
+            <label for="admin-password" class="block text-xs font-mono font-bold uppercase text-neutral-300 mb-1.5">Security Passkey</label>
+            <div class="relative">
+              <span class="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-neutral-500">
+                <i class="fa-solid fa-key text-sm"></i>
+              </span>
+              <input 
+                type="password" 
+                id="admin-password" 
+                required 
+                autocomplete="current-password"
+                placeholder="••••••••••••"
+                value="ApexAdmin@2026!"
+                class="w-full pl-10 pr-10 py-3 rounded-xl bg-neutral-950 border border-neutral-800 focus:border-neon-lime focus:outline-none text-white text-sm font-mono transition-colors"
+              >
+              <button 
+                type="button" 
+                id="toggle-pass-visibility" 
+                class="absolute inset-y-0 right-0 pr-3.5 flex items-center text-neutral-500 hover:text-white transition-colors"
+                aria-label="Toggle password visibility"
+              >
+                <i class="fa-solid fa-eye text-sm" id="pass-eye-icon"></i>
+              </button>
+            </div>
+          </div>
+
+          <div class="pt-2">
+            <button 
+              type="submit" 
+              class="w-full py-4 rounded-xl bg-neon-lime text-black font-display font-black text-sm uppercase tracking-wider shadow-neon-lime hover:scale-[1.02] active:scale-95 transition-all flex items-center justify-center gap-2"
+            >
+              <i class="fa-solid fa-lock-open text-xs"></i>
+              <span>AUTHENTICATE PORTAL</span>
+            </button>
+          </div>
+        </form>
+
+        <!-- Credentials Helper Note -->
+        <div class="mt-6 pt-5 border-t border-neutral-800 text-center text-[11px] font-mono text-neutral-400">
+          <p class="text-neutral-500 uppercase tracking-widest text-[9px] mb-2">Pre-Authorized Master Credentials</p>
+          <div class="bg-black/60 p-3 rounded-xl border border-neutral-800 mb-3 space-y-1 text-left sm:text-center">
+            <p><span class="text-neutral-400">Username:</span> <code class="text-neon-lime font-bold">admin</code></p>
+            <p><span class="text-neutral-400">Passkey:</span> <code class="text-neon-lime font-bold">ApexAdmin@2026!</code></p>
+          </div>
+          <button 
+            type="button" 
+            id="autofill-admin-btn" 
+            class="w-full py-2 rounded-lg bg-neutral-800 hover:bg-neutral-700 text-neon-lime font-mono text-xs font-bold transition-all flex items-center justify-center gap-2 border border-neutral-700"
+          >
+            <i class="fa-solid fa-key text-[10px]"></i> Auto-fill Credentials & Clear Lock
+          </button>
+        </div>
+
+      </div>
+
+      <!-- Security Notice -->
+      <div class="mt-6 text-center text-xs font-mono text-neutral-500 flex items-center justify-center gap-2">
+        <i class="fa-solid fa-lock text-neon-lime text-[10px]"></i>
+        <span>SHA-256 HMAC & Cryptographic Salt Enforcement</span>
+      </div>
+
+    </div>
+  </main>
+
+  <!-- Footer -->
+  <footer class="py-6 text-center text-xs text-neutral-600 font-mono">
+    © 2026 APEX ATHLETICS GROUP LLC. RESTRICTED INTERNAL INFRASTRUCTURE.
+  </footer>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script src="js/admin.js"></script>
+  <script>
+    // Show / Hide password toggle
+    const toggleBtn = document.getElementById('toggle-pass-visibility');
+    const passInput = document.getElementById('admin-password');
+    const eyeIcon = document.getElementById('pass-eye-icon');
+
+    if (toggleBtn && passInput && eyeIcon) {
+      toggleBtn.addEventListener('click', () => {
+        if (passInput.type === 'password') {
+          passInput.type = 'text';
+          eyeIcon.className = 'fa-solid fa-eye-slash text-sm text-neon-lime';
+        } else {
+          passInput.type = 'password';
+          eyeIcon.className = 'fa-solid fa-eye text-sm text-neutral-500';
+        }
+      });
+    }
+
+    // Check if redirected with notice
+    const notice = sessionStorage.getItem('apex_auth_notice');
+    if (notice) {
+      const errBox = document.getElementById('login-error-msg');
+      if (errBox) {
+        errBox.textContent = notice;
+        errBox.classList.remove('hidden');
+      }
+      sessionStorage.removeItem('apex_auth_notice');
+    }
+  </script>
+</body>
+</html>
