@@ -321,43 +321,41 @@
       gsap.registerPlugin(ScrollTrigger);
     }
 
-    // 1. Hero Reveal Timeline
-    const heroTl = gsap.timeline({ defaults: { ease: 'power4.out' } });
+    // 1. Hero Reveal Timeline (Fast, instant render without 3D rotation clipping)
+    const heroTl = gsap.timeline({ defaults: { ease: 'power3.out' } });
 
     heroTl
       .from('#hero-badge', {
-        y: -30,
+        y: -15,
         opacity: 0,
-        duration: 0.8,
-        delay: 0.2
+        duration: 0.5,
+        delay: 0.1
       })
       .from('.hero-word', {
-        y: 80,
+        y: 30,
         opacity: 0,
-        rotateX: -30,
-        stagger: 0.08,
-        duration: 1.1
-      }, '-=0.4')
+        stagger: 0.05,
+        duration: 0.7
+      }, '-=0.25')
       .from('#hero-desc', {
-        y: 20,
-        opacity: 0,
-        duration: 0.8
-      }, '-=0.6')
-      .from('.hero-cta-group', {
-        y: 25,
-        opacity: 0,
-        duration: 0.8
-      }, '-=0.5')
-      .from('#hero-scroll-indicator', {
         y: 15,
         opacity: 0,
-        duration: 0.8
-      }, '-=0.4')
-      .from('#metrics-bar', {
-        y: 40,
+        duration: 0.5
+      }, '-=0.35')
+      .from('.hero-cta-group', {
+        y: 15,
         opacity: 0,
-        duration: 0.9
-      }, '-=0.4');
+        duration: 0.5
+      }, '-=0.3')
+      .from('#hero-scroll-indicator', {
+        opacity: 0,
+        duration: 0.4
+      }, '-=0.2')
+      .from('#metrics-bar', {
+        y: 20,
+        opacity: 0,
+        duration: 0.5
+      }, '-=0.2');
 
     // 2. Animated Metrics Counters with ScrollTrigger
     const counterElements = $$('.metric-counter');
@@ -372,12 +370,12 @@
       if (typeof ScrollTrigger !== 'undefined') {
         ScrollTrigger.create({
           trigger: el,
-          start: 'top 88%',
+          start: 'top 95%',
           once: true,
           onEnter: () => {
             gsap.to(obj, {
               val: targetVal,
-              duration: 2.2,
+              duration: 1.8,
               ease: 'power3.out',
               onUpdate: () => {
                 if (decimals > 0) {
@@ -390,24 +388,27 @@
           }
         });
       } else {
-        // Fallback without ScrollTrigger
         el.textContent = (decimals > 0 ? targetVal.toFixed(decimals) : Math.floor(targetVal).toLocaleString()) + suffix;
       }
     });
 
-    // 3. Section Titles Reveal on Scroll
+    // 3. Fast Section & Card Reveals (Trigger early to eliminate any empty/blank space)
     if (typeof ScrollTrigger !== 'undefined') {
+      const isMobile = window.innerWidth < 1024;
+      const startPos = isMobile ? 'top 96%' : 'top 88%';
+
       $$('.section-reveal').forEach((sec) => {
         gsap.from(sec.children, {
           scrollTrigger: {
             trigger: sec,
-            start: 'top 85%'
+            start: startPos,
+            once: true
           },
-          y: 45,
+          y: isMobile ? 20 : 35,
           opacity: 0,
-          duration: 0.9,
-          stagger: 0.12,
-          ease: 'power3.out'
+          duration: isMobile ? 0.4 : 0.7,
+          stagger: 0.06,
+          ease: 'power2.out'
         });
       });
 
@@ -415,39 +416,42 @@
       gsap.from('.program-card', {
         scrollTrigger: {
           trigger: '#programs-grid',
-          start: 'top 80%'
+          start: startPos,
+          once: true
         },
-        y: 60,
+        y: isMobile ? 25 : 45,
         opacity: 0,
-        duration: 0.9,
-        stagger: 0.14,
-        ease: 'power3.out'
+        duration: isMobile ? 0.45 : 0.7,
+        stagger: 0.08,
+        ease: 'power2.out'
       });
 
       // 5. Features Pin/Stagger Reveal
       gsap.from('.feature-card', {
         scrollTrigger: {
           trigger: '#features-container',
-          start: 'top 80%'
+          start: startPos,
+          once: true
         },
-        y: 50,
+        y: isMobile ? 20 : 40,
         opacity: 0,
-        duration: 0.8,
-        stagger: 0.12,
-        ease: 'power3.out'
+        duration: isMobile ? 0.4 : 0.65,
+        stagger: 0.06,
+        ease: 'power2.out'
       });
 
       // 6. Pricing Cards Reveal
       gsap.from('.pricing-card', {
         scrollTrigger: {
           trigger: '#pricing-grid',
-          start: 'top 80%'
+          start: startPos,
+          once: true
         },
-        y: 60,
+        y: isMobile ? 25 : 45,
         opacity: 0,
-        duration: 0.9,
-        stagger: 0.15,
-        ease: 'power3.out'
+        duration: isMobile ? 0.45 : 0.7,
+        stagger: 0.08,
+        ease: 'power2.out'
       });
     }
 
