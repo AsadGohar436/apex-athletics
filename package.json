@@ -2,8 +2,9 @@
   "name": "apex-athletics-gym",
   "version": "1.0.0",
   "description": "Modern, high-energy, fully animated athletic performance gym website powered by GSAP, ScrollTrigger, Lenis, and Tailwind CSS.",
+  "main": "server.js",
   "scripts": {
-    "start": "node local-dev-server.js"
+    "start": "node server.js"
   },
   "keywords": [
     "gym",
