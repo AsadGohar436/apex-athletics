@@ -1,0 +1,4 @@
+local-dev-server.js
+supabase_schema.sql
+node_modules/
+.git/
