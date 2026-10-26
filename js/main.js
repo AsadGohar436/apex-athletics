@@ -321,6 +321,8 @@
       gsap.registerPlugin(ScrollTrigger);
     }
 
+    const isMobile = window.innerWidth < 1024 || (typeof window !== 'undefined' && !window.matchMedia('(pointer: fine)').matches);
+
     // 1. Hero Reveal Timeline (Fast, instant render without 3D rotation clipping)
     const heroTl = gsap.timeline({ defaults: { ease: 'power3.out' } });
 
@@ -332,10 +334,10 @@
         delay: 0.1
       })
       .from('.hero-word', {
-        y: 30,
+        y: 25,
         opacity: 0,
         stagger: 0.05,
-        duration: 0.7
+        duration: 0.6
       }, '-=0.25')
       .from('#hero-desc', {
         y: 15,
@@ -350,24 +352,20 @@
       .from('#hero-scroll-indicator', {
         opacity: 0,
         duration: 0.4
-      }, '-=0.2')
-      .from('#metrics-bar', {
-        y: 20,
-        opacity: 0,
-        duration: 0.5
       }, '-=0.2');
 
-    // 2. Animated Metrics Counters with ScrollTrigger
+    // 2. Animated Metrics Counters
     const counterElements = $$('.metric-counter');
 
     counterElements.forEach((el) => {
       const targetVal = parseFloat(el.getAttribute('data-target') || '0');
       const suffix = el.getAttribute('data-suffix') || '';
       const decimals = parseInt(el.getAttribute('data-decimals') || '0', 10);
+      const formatVal = (v) => decimals > 0 ? v.toFixed(decimals) + suffix : Math.floor(v).toLocaleString() + suffix;
 
       const obj = { val: 0 };
 
-      if (typeof ScrollTrigger !== 'undefined') {
+      if (!isMobile && typeof ScrollTrigger !== 'undefined') {
         ScrollTrigger.create({
           trigger: el,
           start: 'top 95%',
@@ -378,80 +376,86 @@
               duration: 1.8,
               ease: 'power3.out',
               onUpdate: () => {
-                if (decimals > 0) {
-                  el.textContent = obj.val.toFixed(decimals) + suffix;
-                } else {
-                  el.textContent = Math.floor(obj.val).toLocaleString() + suffix;
-                }
+                el.textContent = formatVal(obj.val);
               }
             });
           }
         });
       } else {
-        el.textContent = (decimals > 0 ? targetVal.toFixed(decimals) : Math.floor(targetVal).toLocaleString()) + suffix;
+        // Instant render on mobile to eliminate any lag or blank numbers
+        el.textContent = formatVal(targetVal);
       }
     });
 
-    // 3. Fast Section & Card Reveals (Trigger early to eliminate any empty/blank space)
-    if (typeof ScrollTrigger !== 'undefined') {
-      const isMobile = window.innerWidth < 1024;
-      const startPos = isMobile ? 'top 96%' : 'top 88%';
-
+    // 3. Fast Section & Card Reveals
+    // CRITICAL: On mobile, all cards and sections are 100% visible immediately (Zero blank voids!)
+    if (!isMobile && typeof ScrollTrigger !== 'undefined') {
       $$('.section-reveal').forEach((sec) => {
         gsap.from(sec.children, {
           scrollTrigger: {
             trigger: sec,
-            start: startPos,
+            start: 'top 88%',
             once: true
           },
-          y: isMobile ? 20 : 35,
+          y: 30,
           opacity: 0,
-          duration: isMobile ? 0.4 : 0.7,
+          duration: 0.6,
           stagger: 0.06,
-          ease: 'power2.out'
+          ease: 'power2.out',
+          clearProps: 'all'
         });
       });
 
-      // 4. Staggered Program Cards Reveal
+      // 4. Staggered Program Cards Reveal (Desktop only)
       gsap.from('.program-card', {
         scrollTrigger: {
           trigger: '#programs-grid',
-          start: startPos,
+          start: 'top 88%',
           once: true
         },
-        y: isMobile ? 25 : 45,
+        y: 35,
         opacity: 0,
-        duration: isMobile ? 0.45 : 0.7,
+        duration: 0.6,
         stagger: 0.08,
-        ease: 'power2.out'
+        ease: 'power2.out',
+        clearProps: 'all'
       });
 
-      // 5. Features Pin/Stagger Reveal
+      // 5. Features Pin/Stagger Reveal (Desktop only)
       gsap.from('.feature-card', {
         scrollTrigger: {
           trigger: '#features-container',
-          start: startPos,
+          start: 'top 88%',
           once: true
         },
-        y: isMobile ? 20 : 40,
+        y: 30,
         opacity: 0,
-        duration: isMobile ? 0.4 : 0.65,
+        duration: 0.6,
         stagger: 0.06,
-        ease: 'power2.out'
+        ease: 'power2.out',
+        clearProps: 'all'
       });
 
-      // 6. Pricing Cards Reveal
+      // 6. Pricing Cards Reveal (Desktop only)
       gsap.from('.pricing-card', {
         scrollTrigger: {
           trigger: '#pricing-grid',
-          start: startPos,
+          start: 'top 88%',
           once: true
         },
-        y: isMobile ? 25 : 45,
+        y: 35,
         opacity: 0,
-        duration: isMobile ? 0.45 : 0.7,
+        duration: 0.6,
         stagger: 0.08,
-        ease: 'power2.out'
+        ease: 'power2.out',
+        clearProps: 'all'
+      });
+    } else {
+      // Mobile / Touch screens: Ensure 100% visibility for all elements
+      $$('.section-reveal > *, .program-card, .feature-card, .pricing-card').forEach((el) => {
+        el.style.opacity = '1';
+        el.style.transform = 'none';
+        el.style.visibility = 'visible';
       });
     }
 
@@ -776,15 +780,21 @@
       `;
     }).join('');
 
-    // Smooth entry stagger
-    if (typeof gsap !== 'undefined') {
+    // Smooth entry stagger on desktop only; immediate display on mobile
+    const isMobileDevice = window.innerWidth < 1024;
+    if (typeof gsap !== 'undefined' && !isMobileDevice) {
       gsap.from('.schedule-item', {
-        y: 20,
+        y: 15,
         opacity: 0,
-        duration: 0.4,
-        stagger: 0.05,
-        ease: 'power2.out'
+        duration: 0.35,
+        stagger: 0.04,
+        ease: 'power2.out',
+        clearProps: 'all'
       });
+    }
+
+    if (typeof ScrollTrigger !== 'undefined') {
+      ScrollTrigger.refresh();
     }
 
     // Attach click listener to newly rendered reserve buttons
