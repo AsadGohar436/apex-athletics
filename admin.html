@@ -88,67 +88,67 @@
   <div class="flex-1 max-w-7xl w-full mx-auto p-4 sm:p-6 lg:p-8 flex flex-col gap-6">
     
     <!-- STATS OVERVIEW CARDS -->
-    <div class="grid grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6">
+    <div class="grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-6">
       
-      <div class="admin-card p-5">
-        <div class="flex items-center justify-between text-neutral-400 mb-2">
-          <span class="text-xs font-mono font-bold uppercase tracking-wider">Total Athletes</span>
-          <i class="fa-solid fa-users text-neon-lime"></i>
+      <div class="admin-card p-4 sm:p-5">
+        <div class="flex items-center justify-between text-neutral-400 mb-1.5">
+          <span class="text-[10px] sm:text-xs font-mono font-bold uppercase tracking-wider">Total Athletes</span>
+          <i class="fa-solid fa-users text-neon-lime text-xs sm:text-sm"></i>
         </div>
-        <div class="font-bebas text-4xl sm:text-5xl font-bold text-white tracking-wide" id="stat-total-members">15,254</div>
-        <div class="text-[11px] text-neon-lime font-mono mt-1 flex items-center gap-1">
-          <i class="fa-solid fa-arrow-trend-up"></i> +48 joined this week
+        <div class="font-bebas text-3xl sm:text-5xl font-bold text-white tracking-wide" id="stat-total-members">15,254</div>
+        <div class="text-[10px] sm:text-[11px] text-neon-lime font-mono mt-1 flex items-center gap-1 truncate">
+          <i class="fa-solid fa-arrow-trend-up"></i> +48 this week
         </div>
       </div>
 
-      <div class="admin-card p-5">
-        <div class="flex items-center justify-between text-neutral-400 mb-2">
-          <span class="text-xs font-mono font-bold uppercase tracking-wider">Live in Facility</span>
-          <span class="w-2.5 h-2.5 rounded-full bg-neon-lime animate-ping"></span>
+      <div class="admin-card p-4 sm:p-5">
+        <div class="flex items-center justify-between text-neutral-400 mb-1.5">
+          <span class="text-[10px] sm:text-xs font-mono font-bold uppercase tracking-wider">In Facility</span>
+          <span class="w-2 h-2 rounded-full bg-neon-lime animate-ping"></span>
         </div>
-        <div class="font-bebas text-4xl sm:text-5xl font-bold text-white tracking-wide" id="stat-active-members">148</div>
-        <div class="text-[11px] text-neutral-400 font-mono mt-1">Biometric gate checks active</div>
+        <div class="font-bebas text-3xl sm:text-5xl font-bold text-white tracking-wide" id="stat-active-members">148</div>
+        <div class="text-[10px] sm:text-[11px] text-neutral-400 font-mono mt-1 truncate">Biometric checks active</div>
       </div>
 
-      <div class="admin-card p-5">
-        <div class="flex items-center justify-between text-neutral-400 mb-2">
-          <span class="text-xs font-mono font-bold uppercase tracking-wider">Pending Bookings</span>
-          <i class="fa-solid fa-clock text-amber-400"></i>
+      <div class="admin-card p-4 sm:p-5">
+        <div class="flex items-center justify-between text-neutral-400 mb-1.5">
+          <span class="text-[10px] sm:text-xs font-mono font-bold uppercase tracking-wider">Bookings</span>
+          <i class="fa-solid fa-clock text-amber-400 text-xs sm:text-sm"></i>
         </div>
-        <div class="font-bebas text-4xl sm:text-5xl font-bold text-amber-400 tracking-wide" id="stat-pending-bookings">4</div>
-        <div class="text-[11px] text-neutral-400 font-mono mt-1">Require VIP approval</div>
+        <div class="font-bebas text-3xl sm:text-5xl font-bold text-amber-400 tracking-wide" id="stat-pending-bookings">4</div>
+        <div class="text-[10px] sm:text-[11px] text-neutral-400 font-mono mt-1 truncate">Require VIP review</div>
       </div>
 
-      <div class="admin-card p-5">
-        <div class="flex items-center justify-between text-neutral-400 mb-2">
-          <span class="text-xs font-mono font-bold uppercase tracking-wider">Monthly Run Rate</span>
-          <i class="fa-solid fa-dollar-sign text-neon-lime"></i>
+      <div class="admin-card p-4 sm:p-5">
+        <div class="flex items-center justify-between text-neutral-400 mb-1.5">
+          <span class="text-[10px] sm:text-xs font-mono font-bold uppercase tracking-wider">MRR</span>
+          <i class="fa-solid fa-dollar-sign text-neon-lime text-xs sm:text-sm"></i>
         </div>
-        <div class="font-bebas text-4xl sm:text-5xl font-bold text-neon-lime tracking-wide" id="stat-mrr">$185,240</div>
-        <div class="text-[11px] text-neutral-400 font-mono mt-1">100% cloud reconciled</div>
+        <div class="font-bebas text-3xl sm:text-5xl font-bold text-neon-lime tracking-wide" id="stat-mrr">$185,240</div>
+        <div class="text-[10px] sm:text-[11px] text-neutral-400 font-mono mt-1 truncate">100% reconciled</div>
       </div>
 
     </div>
 
     <!-- TABS NAVIGATION BAR -->
-    <div class="flex items-center justify-between border-b border-neutral-800 pb-3 gap-2 overflow-x-auto scrollbar-none">
-      <div class="flex items-center gap-2">
-        <button class="admin-nav-tab px-4 py-2 rounded-xl text-xs font-display font-black uppercase tracking-wider transition-all bg-neon-lime text-black" data-tab="members">
-          <i class="fa-solid fa-id-card-clip mr-1.5"></i> Athletes & Members
+    <div class="flex items-center justify-between border-b border-neutral-800 pb-3 gap-2 overflow-x-auto scrollbar-none whitespace-nowrap">
+      <div class="flex items-center gap-1.5 sm:gap-2 flex-nowrap">
+        <button class="admin-nav-tab px-3 sm:px-4 py-2 rounded-xl text-xs font-display font-black uppercase tracking-wider transition-all bg-neon-lime text-black flex-shrink-0" data-tab="members">
+          <i class="fa-solid fa-id-card-clip mr-1.5"></i> Athletes
         </button>
-        <button class="admin-nav-tab px-4 py-2 rounded-xl text-xs font-display font-black uppercase tracking-wider transition-all text-neutral-400 hover:text-white hover:bg-neutral-900" data-tab="bookings">
-          <i class="fa-solid fa-ticket mr-1.5"></i> Bookings & VIP Passes
+        <button class="admin-nav-tab px-3 sm:px-4 py-2 rounded-xl text-xs font-display font-black uppercase tracking-wider transition-all text-neutral-400 hover:text-white hover:bg-neutral-900 flex-shrink-0" data-tab="bookings">
+          <i class="fa-solid fa-ticket mr-1.5"></i> Bookings
         </button>
-        <button class="admin-nav-tab px-4 py-2 rounded-xl text-xs font-display font-black uppercase tracking-wider transition-all text-neutral-400 hover:text-white hover:bg-neutral-900" data-tab="newsletter">
-          <i class="fa-solid fa-envelope mr-1.5"></i> Newsletter Leads
+        <button class="admin-nav-tab px-3 sm:px-4 py-2 rounded-xl text-xs font-display font-black uppercase tracking-wider transition-all text-neutral-400 hover:text-white hover:bg-neutral-900 flex-shrink-0" data-tab="newsletter">
+          <i class="fa-solid fa-envelope mr-1.5"></i> Leads
         </button>
-        <button class="admin-nav-tab px-4 py-2 rounded-xl text-xs font-display font-black uppercase tracking-wider transition-all text-neutral-400 hover:text-white hover:bg-neutral-900" data-tab="security">
-          <i class="fa-solid fa-shield-halved mr-1.5"></i> Security Audit Logs
+        <button class="admin-nav-tab px-3 sm:px-4 py-2 rounded-xl text-xs font-display font-black uppercase tracking-wider transition-all text-neutral-400 hover:text-white hover:bg-neutral-900 flex-shrink-0" data-tab="security">
+          <i class="fa-solid fa-shield-halved mr-1.5"></i> Audit Logs
         </button>
       </div>
 
-      <div class="flex items-center gap-2 flex-shrink-0">
-        <button id="open-add-member-modal" class="px-3.5 py-2 rounded-xl bg-neutral-900 hover:bg-neutral-800 border border-neutral-700 text-xs font-bold uppercase tracking-wider text-white transition-all flex items-center gap-1.5">
+      <div class="flex items-center gap-2 flex-shrink-0 ml-2">
+        <button id="open-add-member-modal" class="px-3 sm:px-3.5 py-2 rounded-xl bg-neutral-900 hover:bg-neutral-800 border border-neutral-700 text-xs font-bold uppercase tracking-wider text-white transition-all flex items-center gap-1.5 flex-shrink-0">
           <i class="fa-solid fa-plus text-neon-lime"></i>
           <span>Add Athlete</span>
         </button>

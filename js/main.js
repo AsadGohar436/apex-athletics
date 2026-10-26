@@ -113,7 +113,8 @@
   let lenis = null;
 
   function initSmoothScroll() {
-    if (typeof Lenis !== 'undefined') {
+    const isDesktop = typeof window !== 'undefined' && window.innerWidth >= 1024 && window.matchMedia('(pointer: fine)').matches;
+    if (typeof Lenis !== 'undefined' && isDesktop) {
       lenis = new Lenis({
         duration: 1.2,
         easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
@@ -1211,43 +1212,60 @@
 
     let isOpen = false;
 
-    function toggleMenu() {
-      isOpen = !isOpen;
-      playSound('click');
+    function closeMenu() {
+      if (!isOpen) return;
+      isOpen = false;
+      document.body.style.overflow = '';
+      if (line1 && line2 && line3) {
+        line1.style.transform = 'none';
+        line2.style.opacity = '1';
+        line3.style.transform = 'none';
+      }
 
-      if (isOpen) {
-        overlay.classList.remove('hidden');
-        overlay.classList.add('flex');
-        document.body.style.overflow = 'hidden';
-
-        // Animate hamburger to X
-        if (line1 && line2 && line3) {
-          line1.style.transform = 'translateY(8px) rotate(45deg)';
-          line2.style.opacity = '0';
-          line3.style.transform = 'translateY(-8px) rotate(-45deg)';
-        }
-
-        gsap.fromTo(overlay, { opacity: 0 }, { opacity: 1, duration: 0.3 });
-        gsap.fromTo('.mobile-menu-item',
-          { y: 30, opacity: 0 },
-          { y: 0, opacity: 1, duration: 0.4, stagger: 0.08, delay: 0.1, ease: 'power3.out' }
-        );
-      } else {
-        document.body.style.overflow = '';
-        if (line1 && line2 && line3) {
-          line1.style.transform = 'none';
-          line2.style.opacity = '1';
-          line3.style.transform = 'none';
-        }
-
+      if (typeof gsap !== 'undefined' && overlay) {
         gsap.to(overlay, {
           opacity: 0,
-          duration: 0.25,
+          duration: 0.22,
           onComplete: () => {
             overlay.classList.add('hidden');
             overlay.classList.remove('flex');
           }
         });
+      } else if (overlay) {
+        overlay.classList.add('hidden');
+        overlay.classList.remove('flex');
+      }
+    }
+
+    function openMenu() {
+      if (isOpen || !overlay) return;
+      isOpen = true;
+      playSound('click');
+      overlay.classList.remove('hidden');
+      overlay.classList.add('flex');
+      document.body.style.overflow = 'hidden';
+
+      // Animate hamburger to sharp symmetrical X
+      if (line1 && line2 && line3) {
+        line1.style.transform = 'translateY(7px) rotate(45deg)';
+        line2.style.opacity = '0';
+        line3.style.transform = 'translateY(-7px) rotate(-45deg)';
+      }
+
+      if (typeof gsap !== 'undefined') {
+        gsap.fromTo(overlay, { opacity: 0 }, { opacity: 1, duration: 0.25 });
+        gsap.fromTo('.mobile-nav-link, .mobile-menu-item',
+          { y: 20, opacity: 0 },
+          { y: 0, opacity: 1, duration: 0.35, stagger: 0.04, delay: 0.05, ease: 'power3.out' }
+        );
+      }
+    }
+
+    function toggleMenu() {
+      if (isOpen) {
+        closeMenu();
+      } else {
+        openMenu();
       }
     }
 
@@ -1255,10 +1273,28 @@
       toggleBtn.addEventListener('click', toggleMenu);
     }
 
+    const closeBtn = $('#mobile-menu-close');
+    if (closeBtn) {
+      closeBtn.addEventListener('click', closeMenu);
+    }
+
+    // Auto-close when clicking any nav link
     links.forEach((link) => {
-      link.addEventListener('click', () => {
-        if (isOpen) toggleMenu();
+      link.addEventListener('click', closeMenu);
+    });
+
+    // Auto-close when clicking any modal trigger inside overlay
+    if (overlay) {
+      $$('.trigger-join-modal', overlay).forEach((btn) => {
+        btn.addEventListener('click', closeMenu);
       });
+    }
+
+    // Auto reset if resized to desktop width
+    window.addEventListener('resize', () => {
+      if (window.innerWidth >= 1280 && isOpen) {
+        closeMenu();
+      }
     });
   }
 

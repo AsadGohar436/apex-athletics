@@ -47,14 +47,14 @@
     <div class="max-w-7xl mx-auto flex items-center justify-between gap-4">
       
       <a href="index.html" class="flex items-center gap-2.5 sm:gap-3 group focus:outline-none flex-shrink-0" aria-label="Apex Athletics Home">
-        <div class="w-9 h-9 sm:w-10 sm:h-10 rounded-xl bg-neon-lime flex items-center justify-center font-display font-black text-black text-lg sm:text-xl shadow-[0_0_15px_rgba(204,255,0,0.5)] group-hover:scale-105 group-hover:rotate-3 transition-transform">
+        <div class="w-8 h-8 sm:w-10 sm:h-10 rounded-xl bg-neon-lime flex items-center justify-center font-display font-black text-black text-base sm:text-xl shadow-[0_0_15px_rgba(204,255,0,0.5)] group-hover:scale-105 group-hover:rotate-3 transition-transform">
           <i class="fa-solid fa-bolt"></i>
         </div>
         <div class="flex flex-col">
-          <span class="font-display font-extrabold text-lg sm:text-xl tracking-tight text-white group-hover:text-neon-lime transition-colors">
+          <span class="font-display font-extrabold text-base sm:text-xl tracking-tight text-white group-hover:text-neon-lime transition-colors">
             APEX<span class="text-neon-lime font-black"> // </span>ATHLETICS
           </span>
-          <span class="text-[9px] sm:text-[10px] tracking-[0.25em] uppercase text-neutral-400 font-semibold">Performance Lab</span>
+          <span class="text-[8px] sm:text-[10px] tracking-[0.2em] uppercase text-neutral-400 font-semibold">Performance Lab</span>
         </div>
       </a>
 
@@ -77,14 +77,14 @@
           <span id="audio-status-text" class="text-neutral-400">SFX: OFF</span>
         </button>
 
-        <button class="trigger-join-modal btn-magnetic btn-shine px-4 sm:px-6 py-2 sm:py-2.5 rounded-full bg-neon-lime text-black font-display font-black text-xs sm:text-sm tracking-wider uppercase shadow-neon-lime hover:scale-105 active:scale-95 transition-all">
+        <button class="trigger-join-modal btn-magnetic btn-shine hidden sm:inline-flex px-4 sm:px-6 py-2 sm:py-2.5 rounded-full bg-neon-lime text-black font-display font-black text-xs sm:text-sm tracking-wider uppercase shadow-neon-lime hover:scale-105 active:scale-95 transition-all">
           <span>Join Now</span>
         </button>
 
-        <button id="mobile-menu-toggle" class="xl:hidden w-10 h-10 flex flex-col items-center justify-center gap-1.5 rounded-xl bg-neutral-900 border border-neutral-800" aria-label="Toggle Navigation Menu">
-          <span id="ham-line-1" class="w-5 sm:w-6 h-0.5 bg-neutral-200 transition-all"></span>
-          <span id="ham-line-2" class="w-5 sm:w-6 h-0.5 bg-neutral-200 transition-all"></span>
-          <span id="ham-line-3" class="w-3.5 sm:w-4 h-0.5 bg-neon-lime self-start ml-2 sm:ml-2.5 transition-all"></span>
+        <button id="mobile-menu-toggle" class="xl:hidden w-10 h-10 flex flex-col items-center justify-center gap-1.5 rounded-xl bg-neutral-900 border border-neutral-800 focus:outline-none focus:ring-2 focus:ring-neon-lime cursor-pointer" aria-label="Toggle Navigation Menu">
+          <span id="ham-line-1" class="w-5 h-0.5 bg-neutral-200 transition-all duration-300"></span>
+          <span id="ham-line-2" class="w-5 h-0.5 bg-neutral-200 transition-all duration-300"></span>
+          <span id="ham-line-3" class="w-5 h-0.5 bg-neon-lime transition-all duration-300"></span>
         </button>
       </div>
 
@@ -92,41 +92,49 @@
   </header>
 
   <!-- MOBILE MENU OVERLAY -->
-  <div id="mobile-menu-overlay" class="fixed inset-0 z-40 bg-black/95 backdrop-blur-2xl hidden flex-col justify-between px-6 py-24 overflow-y-auto" aria-modal="true" role="dialog">
-    <div class="flex flex-col gap-6">
+  <div id="mobile-menu-overlay" class="fixed inset-0 z-40 bg-black/95 backdrop-blur-2xl hidden flex-col justify-between px-6 py-20 sm:py-24 overflow-y-auto" aria-modal="true" role="dialog">
+    <div class="flex items-center justify-between pb-4 border-b border-neutral-800">
       <span class="text-xs font-mono tracking-widest uppercase text-neon-lime">// NAVIGATION PROTOCOL</span>
-      <nav class="flex flex-col gap-3 font-display font-black text-2xl sm:text-3xl uppercase tracking-wider">
-        <a href="index.html" class="mobile-nav-link text-neutral-300 hover:text-neon-lime">00. Home</a>
-        <a href="programs.html" class="mobile-nav-link text-neutral-300 hover:text-neon-lime">01. Programs</a>
-        <a href="schedule.html" class="mobile-nav-link text-neutral-300 hover:text-neon-lime">02. Schedule</a>
-        <a href="facilities.html" class="mobile-nav-link text-neutral-300 hover:text-neon-lime">03. Arsenal & Amenities</a>
-        <a href="coaches.html" class="mobile-nav-link text-neutral-300 hover:text-neon-lime">04. Elite Coaches</a>
-        <a href="pricing.html" class="mobile-nav-link text-neutral-300 hover:text-neon-lime">05. Membership Tiers</a>
-        <a href="calculator.html" class="mobile-nav-link text-neon-lime">06. Athletic Calculator</a>
-        <a href="admin-login.html" class="mobile-nav-link text-neutral-400 hover:text-neon-lime flex items-center gap-2 text-xl pt-2 border-t border-neutral-800">
-          <i class="fa-solid fa-shield-halved text-neon-lime text-base"></i> 07. Admin Portal
-        </a>
-      </nav>
+      <button id="mobile-menu-close" class="w-9 h-9 rounded-full bg-neutral-900 border border-neutral-800 text-neutral-400 hover:text-white flex items-center justify-center transition-colors" aria-label="Close Navigation Menu">
+        <i class="fa-solid fa-xmark text-sm"></i>
+      </button>
     </div>
 
-    <div class="flex flex-col gap-4 pt-6 border-t border-neutral-800">
-      <button class="trigger-join-modal mobile-menu-item w-full py-4 rounded-xl bg-neon-lime text-black font-display font-black text-center text-base sm:text-lg uppercase tracking-wider shadow-neon-lime">
+    <nav class="flex flex-col gap-2.5 sm:gap-3.5 font-display font-black text-2xl sm:text-3xl uppercase tracking-wider my-auto py-6">
+      <a href="index.html" class="mobile-nav-link text-neutral-300 hover:text-neon-lime">00. Home</a>
+      <a href="programs.html" class="mobile-nav-link text-neutral-300 hover:text-neon-lime">01. Programs</a>
+      <a href="schedule.html" class="mobile-nav-link text-neutral-300 hover:text-neon-lime">02. Schedule</a>
+      <a href="facilities.html" class="mobile-nav-link text-neutral-300 hover:text-neon-lime">03. Arsenal & Amenities</a>
+      <a href="coaches.html" class="mobile-nav-link text-neutral-300 hover:text-neon-lime">04. Elite Coaches</a>
+      <a href="pricing.html" class="mobile-nav-link text-neutral-300 hover:text-neon-lime">05. Membership Tiers</a>
+      <a href="calculator.html" class="mobile-nav-link text-neon-lime">06. Athletic Calculator</a>
+      <a href="admin-login.html" class="mobile-nav-link text-neutral-400 hover:text-neon-lime flex items-center gap-2 text-xl pt-2 border-t border-neutral-800">
+        <i class="fa-solid fa-shield-halved text-neon-lime text-base"></i> 07. Admin Portal
+      </a>
+    </nav>
+
+    <div class="flex flex-col gap-3 pt-4 border-t border-neutral-800">
+      <button class="trigger-join-modal mobile-menu-item w-full py-3.5 sm:py-4 rounded-xl bg-neon-lime text-black font-display font-black text-center text-sm sm:text-base uppercase tracking-wider shadow-neon-lime">
         Claim 7-Day VIP Pass
       </button>
+      <div class="flex items-center justify-between text-[11px] sm:text-xs text-neutral-400 font-mono">
+        <span>FACILITY: OPEN 24/7</span>
+        <span class="text-neon-lime flex items-center gap-1.5"><span class="w-2 h-2 rounded-full bg-neon-lime animate-ping"></span> 142 ACTIVE</span>
+      </div>
     </div>
   </div>
 
-  <main class="pt-32 pb-24 px-4 sm:px-8 max-w-7xl mx-auto">
+  <main class="pt-28 sm:pt-32 pb-24 px-4 sm:px-8 max-w-7xl mx-auto">
     
     <!-- PAGE HERO HEADER -->
-    <div class="mb-12">
-      <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-neon-lime/10 border border-neon-lime/30 text-neon-lime font-mono text-xs font-bold uppercase tracking-widest mb-4">
+    <div class="mb-10 sm:mb-12">
+      <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-neon-lime/10 border border-neon-lime/30 text-neon-lime font-mono text-[11px] sm:text-xs font-bold uppercase tracking-wider mb-4">
         <i class="fa-solid fa-calculator"></i> BIOMETRIC ALGORITHMS
       </div>
       <h1 class="font-display font-black text-4xl sm:text-6xl lg:text-7xl uppercase tracking-tight text-white">
         DIAGNOSTIC <span class="text-transparent bg-clip-text bg-gradient-to-r from-neon-lime via-white to-neon-lime neon-text-lime">MACRO LAB</span>
       </h1>
-      <p class="max-w-2xl text-neutral-400 text-sm sm:text-base mt-4 leading-relaxed">
+      <p class="max-w-2xl text-neutral-400 text-xs sm:text-base mt-3 sm:mt-4 leading-relaxed">
         Input your biometric parameters to instantly calculate your Basal Metabolic Rate (BMR), Total Daily Energy Expenditure (TDEE), and exact macronutrient split for your athletic goals.
       </p>
     </div>
@@ -135,16 +143,16 @@
     <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
       
       <!-- FORM COLUMN (5 COLUMNS) -->
-      <div class="lg:col-span-5 rounded-2xl glass-panel border border-neutral-800 p-6 sm:p-8 bg-dark-card shadow-2xl">
+      <div class="lg:col-span-5 rounded-2xl glass-panel border border-neutral-800 p-5 sm:p-8 bg-dark-card shadow-2xl">
         
-        <div class="flex items-center justify-between pb-6 mb-6 border-b border-neutral-800">
+        <div class="flex flex-col sm:flex-row sm:items-center justify-between pb-4 sm:pb-6 mb-5 sm:mb-6 border-b border-neutral-800 gap-3">
           <span class="text-xs font-mono font-bold uppercase text-white flex items-center gap-2">
             <i class="fa-solid fa-sliders text-neon-lime"></i> Athlete Inputs
           </span>
 
           <!-- UNIT TOGGLE -->
-          <div class="flex items-center p-1 rounded-lg bg-neutral-900 border border-neutral-800 text-[11px] font-mono">
-            <button id="unit-metric" class="px-2.5 py-1 rounded bg-neon-lime text-black font-bold">METRIC (KG/CM)</button>
+          <div class="flex items-center p-1 rounded-lg bg-neutral-900 border border-neutral-800 text-[10px] sm:text-[11px] font-mono self-start sm:self-auto">
+            <button id="unit-metric" class="px-2.5 py-1 rounded bg-neon-lime text-black font-bold">METRIC (KG)</button>
             <button id="unit-imperial" class="px-2.5 py-1 rounded text-neutral-400 hover:text-white font-bold">IMPERIAL (LBS)</button>
           </div>
         </div>

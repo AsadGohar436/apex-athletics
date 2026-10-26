@@ -16,12 +16,16 @@ html {
   color: #f3f4f6;
   font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
   overflow-x: hidden;
+  max-width: 100%;
+  -webkit-text-size-adjust: 100%;
 }
 
 body {
   background-color: var(--color-bg);
   overflow-x: hidden;
+  max-width: 100%;
   position: relative;
+  -webkit-tap-highlight-color: transparent;
 }
 
 /* Aggressive display typography */
@@ -94,12 +98,18 @@ body {
   background-color: rgba(204, 255, 0, 0.1);
 }
 
-/* Disable custom cursor on touch screens, tablets, or coarse devices */
-@media (hover: none), (pointer: coarse) {
+/* Disable custom cursor completely on mobile, tablet, and touch screens */
+@media (max-width: 1024px), (hover: none), (pointer: coarse) {
   .custom-cursor-dot,
   .custom-cursor-outline {
     display: none !important;
   }
+}
+
+/* Hardware-accelerated smooth momentum scrolling for horizontal carousels & tables */
+.overflow-x-auto,
+[data-scroll-container] {
+  -webkit-overflow-scrolling: touch;
 }
 
 /* Glassmorphism Classes */
