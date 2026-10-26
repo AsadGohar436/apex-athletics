@@ -3,7 +3,6 @@ const fs = require('fs');
 const path = require('path');
 
 const PORT = process.env.PORT || 3000;
-const ROOT = process.cwd();
 
 const MIME_TYPES = {
   '.html': 'text/html; charset=UTF-8',
@@ -23,48 +22,42 @@ const handler = (req, res) => {
   let reqPath = decodeURI(req.url.split('?')[0]);
   if (reqPath === '/' || reqPath === '') reqPath = '/index.html';
 
-  let filePath = path.join(ROOT, reqPath);
+  // Search in both __dirname and process.cwd()
+  let candidates = [
+    path.join(__dirname, reqPath),
+    path.join(process.cwd(), reqPath)
+  ];
 
-  // Auto clean URL resolution (e.g. /pricing -> /pricing.html)
-  if (!path.extname(filePath)) {
-    if (fs.existsSync(filePath + '.html')) {
-      filePath = filePath + '.html';
-    } else if (fs.existsSync(path.join(filePath, 'index.html'))) {
-      filePath = path.join(filePath, 'index.html');
-    }
+  // If no extension, add .html candidates
+  if (!path.extname(reqPath)) {
+    candidates.unshift(
+      path.join(__dirname, reqPath + '.html'),
+      path.join(process.cwd(), reqPath + '.html')
+    );
   }
 
-  // Fallback to __dirname if not found in process.cwd()
-  if (!fs.existsSync(filePath)) {
-    let altPath = path.join(__dirname, reqPath);
-    if (!path.extname(altPath)) {
-      if (fs.existsSync(altPath + '.html')) {
-        altPath = altPath + '.html';
-      } else if (fs.existsSync(path.join(altPath, 'index.html'))) {
-        altPath = path.join(altPath, 'index.html');
-      }
+  let finalPath = candidates.find(p => {
+    try {
+      return fs.existsSync(p) && fs.statSync(p).isFile();
+    } catch (_) {
+      return false;
     }
-    if (fs.existsSync(altPath)) {
-      filePath = altPath;
-    }
-  }
-
-  fs.stat(filePath, (err, stats) => {
-    if (err || !stats.isFile()) {
-      res.writeHead(404, { 'Content-Type': 'text/html; charset=UTF-8' });
-      return res.end('<h1>404 Not Found</h1><p><a href="/">Return Home</a></p>');
-    }
-
-    const ext = path.extname(filePath).toLowerCase();
-    const contentType = MIME_TYPES[ext] || 'application/octet-stream';
-
-    res.writeHead(200, {
-      'Content-Type': contentType,
-      'Access-Control-Allow-Origin': '*'
-    });
-
-    fs.createReadStream(filePath).pipe(res);
   });
+
+  if (!finalPath) {
+    res.writeHead(404, { 'Content-Type': 'text/html; charset=UTF-8' });
+    return res.end('<h1>404 Not Found</h1><p><a href="/">Return to Apex Athletics</a></p>');
+  }
+
+  const ext = path.extname(finalPath).toLowerCase();
+  const contentType = MIME_TYPES[ext] || 'application/octet-stream';
+
+  res.writeHead(200, {
+    'Content-Type': contentType,
+    'Access-Control-Allow-Origin': '*'
+  });
+
+  fs.createReadStream(finalPath).pipe(res);
 };
 
 const server = http.createServer(handler);
